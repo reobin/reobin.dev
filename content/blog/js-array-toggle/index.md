@@ -1,10 +1,12 @@
 ---
-title: How to toggle an item in a javascript array when using functional programming
+title: How to toggle an item in a javascript array
 date: "2020-07-01T22:12:03.284Z"
-description: "This javascript method adds the item if it's not in the array, and removes it if it is."
+description: "Quickly add/remove an item depending on wether it's already in the array or not."
 ---
 
 ## TL;DR
+
+### The function
 
 ```jsx
 const removeAtIndex = (arr, index) => {
@@ -18,8 +20,11 @@ const toggle = (arr, item, compare = (a, b) => a === b) => {
   if (index === -1) return [...arr, item];
   return removeAtIndex(arr, index);
 };
+```
 
-// Usage
+### Usage
+
+```jsx
 let arr = [1, 2, 3];
 
 arr = toggle(arr, 2);

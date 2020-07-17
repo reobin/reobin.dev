@@ -1,0 +1,21 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1,
+.header h3 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.main-link {
+  color: #374046;
+}
+
+.main-link,
+.main-link:hover,
+.main-link:focus {
+  box-shadow: none;
+}
