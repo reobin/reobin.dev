@@ -1,5 +1,6 @@
 // custom typefaces
-import "typeface-montserrat";
+import "typeface-archivo";
 import "typeface-merriweather";
+import "typeface-jetbrains-mono";
 
 import "./src/style/nord-prism.css";
