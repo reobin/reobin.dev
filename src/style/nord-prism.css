@@ -5,9 +5,11 @@
  * Ported for PrismJS by Zane Hitchcoxc (@zwhitchcox) and Gabriel Ramos (@gabrieluizramos)
  */
 
+
 code[class*="language-"],
 pre[class*="language-"] {
   color: #f8f8f2;
+  color: var(--code-text);
   background: none;
   font-family: "JetBrains Mono", Consolas, Monaco, "Andale Mono", "Ubuntu Mono",
     monospace;
@@ -35,10 +37,11 @@ pre[class*="language-"] {
 }
 
 :not(pre) > code[class*="language-"] {
-  background: var(--accent);
+  background: var(--code-word-background);
 }
 pre[class*="language-"] {
   background: #2e3440;
+  background: var(--code-background);
 }
 
 /* Inline code */
@@ -52,11 +55,13 @@ pre[class*="language-"] {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: #636f88;
+  /* color: #636f88; */
+  color: var(--code-comment);
 }
 
 .token.punctuation {
   color: #81a1c1;
+  color: var(--code-primary);
 }
 
 .namespace {
@@ -69,14 +74,17 @@ pre[class*="language-"] {
 .token.symbol,
 .token.deleted {
   color: #81a1c1;
+  color: var(--code-primary);
 }
 
 .token.number {
   color: #b48ead;
+  color: var(--code-number);
 }
 
 .token.boolean {
   color: #81a1c1;
+  color: var(--code-primary);
 }
 
 .token.selector,
@@ -86,6 +94,7 @@ pre[class*="language-"] {
 .token.builtin,
 .token.inserted {
   color: #a3be8c;
+  color: var(--code-string);
 }
 
 .token.operator,
@@ -95,6 +104,7 @@ pre[class*="language-"] {
 .style .token.string,
 .token.variable {
   color: #81a1c1;
+  color: var(--code-primary);
 }
 
 .token.atrule,
@@ -102,10 +112,12 @@ pre[class*="language-"] {
 .token.function,
 .token.class-name {
   color: #88c0d0;
+  color: var(--code-secondary);
 }
 
 .token.keyword {
   color: #81a1c1;
+  color: var(--code-primary);
 }
 
 .token.regex,

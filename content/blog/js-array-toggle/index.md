@@ -34,7 +34,7 @@ arr = toggle(arr, 4);
 console.log(arr); // [1, 3, 4];
 ```
 
-Read below for explanations or just for some pointless (or not) brain-picking.
+Read below for explanations or simply for pointless (or not) brain-picking.
 
 ## Let's get toggling
 
@@ -59,9 +59,9 @@ Basic right? Let's go through a primary version of the `toggle` function in java
 
 ```jsx
 const toggle = (arr, item) => {
-  if (arr.includes(item)) return remove(arr, item);
-  else return add(arr, item);
-};
+	if (arr.includes(item)) return remove(arr, item);
+	else return add(arr, item);
+}
 ```
 
 Pretty simple. What about the `add` and `remove` functions though?
@@ -80,9 +80,9 @@ Removing an item is a little more complex, but let's keep it simple here using f
 
 ```jsx
 const toggle = (arr, item) => {
-  if (arr.includes(item)) return arr.filter(i => i !== item);
-  else return [...arr, item];
-};
+	if (arr.includes(item)) return arr.filter(i => i !== item);
+	else return [...arr, item];
+}
 ```
 
 ## When dealing with objects
@@ -93,9 +93,10 @@ To fix this, we'll give an optional `compare` callback function. This callback w
 
 ```jsx
 const toggle = (arr, item, compare = (a, b) => a === b) => {
-	if (arr.some(i => compare(i, item)) return arr.filter(i => !compare(i, item));
-	else return [...arr, item];
-}
+  if (arr.some(i => compare(i, item)))
+    return arr.filter(i => !compare(i, item));
+  else return [...arr, item];
+};
 ```
 
 We could now call it like this to compare only the `id` of objects:
@@ -124,24 +125,24 @@ The above works, although you might have noticed that we call the `compare` func
 
 ```jsx
 const toggle = (arr, item, compare = (a, b) => a === b) => {
-  const filtered = arr.filter(i => !compare(i, item));
-  if (arr.length === filtered.length) {
-    // The array was not filtered, so the item was not present
-    return [...arr, item];
-  } else {
-    // The array was filtered, so the item was present
-    return filtered;
-  }
-};
+	const filtered = arr.filter(i => !compare(i, item));
+	if (arr.length === filtered.length) {
+		// The array was not filtered, so the item was not present
+		return [...arr, item];
+	} else {
+		// The array was filtered, so the item was present
+		return filtered;
+	}
+}
 ```
 
 Let's clean it up a little.
 
 ```jsx
 const toggle = (arr, item, compare = (a, b) => a === b) => {
-  const filtered = arr.filter(compare);
-  return arr.length === filtered.length ? [...arr, item] : filtered;
-};
+	const filtered = arr.filter(compare);
+	return arr.length === filtered.length ? [...arr, item] : filtered;
+}
 ```
 
 ## A side effect to note
@@ -156,20 +157,20 @@ To address this, you might want to use the `splice` function instead to remove t
 
 ```jsx
 const removeAtIndex = (arr, index) => {
-  const copy = [...arr];
-  copy.splice(index, 1);
-  return copy;
-};
+	const copy = [...arr];
+	copy.splice(index, 1);
+	return copy;
+}
 
 const toggle = (arr, item, compare = (a, b) => a === b) => {
-  const index = arr.findIndex(i => compare(i, item));
-  if (index === -1) return [...arr, item];
-  return removeAtIndex(arr, index);
-};
+	const index = arr.findIndex(i => compare(i, item));
+	if (index === -1) return [...arr, item];
+	return removeAtIndex(arr, index);
+}
 ```
 
 The `findIndex` function will stop at the first element matching the condition given, so it had the side benefit of not looping through the whole array unless the item is at the last index, or simply not found.
 
-Then, with the index, we can use the `splice` function to remove the item from the array.
+Then, with the index, we can use the `splice` function to remove the item from the array. 
 
 The reason we create a copy on the array is to avoid mutation. In other words, it is to avoid altering the original array given to the `toggle` function.
