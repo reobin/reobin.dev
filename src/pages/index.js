@@ -10,7 +10,8 @@ const BlogIndex = ({ data, location }) => {
   return (
     <Layout location={location}>
       <SEO title="All posts" />
-      {posts.map(({ node }) => {
+      <p>Stuff coming up...</p>
+      {[].map(({ node }) => {
         const title = node.frontmatter.title || node.fields.slug;
         return (
           <article key={node.fields.slug}>
