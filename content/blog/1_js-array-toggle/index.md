@@ -33,10 +33,6 @@ arr = toggle(arr, 4); // [1, 3, 4];
 
 Read below for explanations or simply for pointless (or not) brain-picking.
 
-## When would one use toggle?
-
-If you're reading, you probably have a very valid use case for this. I had one, once, leading me to writing this sequence of thoughts. Can't remember what it was, though.
-
 ## Let's get toggling
 
 Let's go through the basic idea of the function by sketching it out.
@@ -98,7 +94,7 @@ That's not really just it, though.
 
 One problem that might come up using this implementation is when using an array of objects. Sometimes you might only want to remove the object with a certain `id` for example, regardless of the value of its other fields. `arr.includes` would be no help in that case.
 
-To address this, let's give our functions an optional `getValue` callback function. This callback will return the actual value we want to compare the items with (i.e.: an `id`).  Since it's optional, we'll give a default value of the item, untouched.
+To address this, let's give our functions an optional `getValue` callback function. This callback will return the actual value we want to compare the items with (like a unique `id`). Since it's optional, we'll give a default value of the item, untouched.
 
 ```jsx
 const toggle = (arr, item, getValue = item => item) => {
@@ -134,7 +130,7 @@ console.log(arr); // [1, 3];
 
 ## Improve performance
 
-The above works, although you might have noticed that we use the comparison with the `getValue` calls twice. That means we loop throught **all** the array twice (or almost all thanks to the `some` function). This could get ugly on huge arrays.
+The above works, although you might have noticed that we use the comparison with the `getValue` calls twice. That means we loop through **all** the array twice (or almost all thanks to the `some` function). This could get ugly on huge arrays.
 
 Let's reorder this to only loop through the array once.
 
@@ -144,23 +140,23 @@ We can use this to our advantage to replace completely the use of `arr.some` we 
 
 ```jsx
 const toggle = (arr, item, getValue = item => item) => {
-	const filtered = arr.filter(i => getValue(i) === getValue(item));
-	if (arr.length === filtered.length) {
-		// array was not filtered; item was not present; then add
-		return [...arr, item];
-	} else {
-		// array was filtered; item was present; then remove
-		return filtered;
-	}
+  const filtered = arr.filter(i => getValue(i) === getValue(item));
+  if (arr.length === filtered.length) {
+    // array was not filtered; item was not present; then add
+    return [...arr, item];
+  } else {
+    // array was filtered; item was present; then remove
+    return filtered;
+  }
 }
 ```
 
-Let's clean it up a little as I don't like clutter, and this is small enough to be readable using some the javascript quirks.
+Let's clean it up a little as I don't like clutter, and this is small enough to be readable using some of the javascript quirks.
 
 ```jsx
 const toggle = (arr, item, getValue = item => item) => {
-	const filtered = arr.filter(i => getValue(i) === getValue(item));
-	return arr.length === filtered.length ? [...arr, item] : filtered;
+  const filtered = arr.filter(i => getValue(i) === getValue(item));
+  return arr.length === filtered.length ? [...arr, item] : filtered;
 }
 ```
 
@@ -172,7 +168,7 @@ This could be seen as a benefit. For example, you could have various items with 
 
 Most of the time though, you don't want that because it could lead to some unwanted item removals.
 
-To address this, let's use the `splice` function instead to remove the item. Since `splice` works with indexes, we need to find that first. We can do that using `findIndex` in similar way we used `filter`. 
+To address this, let's use the [splice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) function instead to remove the item. Since `splice` works with indexes, we need to find that first. We can do that using `findIndex` in a similar way we used `filter`.
 
 The `findIndex` function will stop at the first element matching the condition given, so it has the side benefit of not looping through the whole array unless the item is at the last index, or simply not found.
 
@@ -190,13 +186,13 @@ Then, to remove an item at this index (if not `-1`), we use `splice`.
 
 ```jsx
 const removeAtIndex = (arr, index) => {
-	const copy = [...arr];
-	copy.splice(index, 1);
-	return copy;
+  const copy = [...arr];
+  copy.splice(index, 1);
+  return copy;
 }
 ```
 
-I created a whole function to keep the `toggle` function as clean as possible, and have a great separation of concerns between our utility function set.
+I created a whole function to keep the `toggle` function as clean as possible, and have great separation of concerns between our utility function set.
 
 Here is what our final `toggle` looks like:
 
