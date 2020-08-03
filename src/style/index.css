@@ -1,9 +1,9 @@
 body {
-  --yellow: #F0DA9E;
+  --yellow: #f0da9e;
   --yellow-dark: #b0891c;
-  --red: #F9B3B5;
+  --red: #f9b3b5;
   --red-dark: #cc3338;
-  --green: #AFC5AE;
+  --green: #afc5ae;
   --green-dark: #546654;
   --black: #363636;
   --gray: #e9eaeb;
@@ -115,6 +115,10 @@ a {
 a:hover,
 a:focus {
   box-shadow: 0 1px 0 0 var(--link);
+}
+
+.title {
+  font-size: 2rem;
 }
 
 .accent {

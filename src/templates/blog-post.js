@@ -18,8 +18,8 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
       <article>
         <header>
           <h1
+            className="title"
             style={{
-              fontSize: "3rem",
               marginTop: "1rem",
               marginBottom: 0,
             }}
