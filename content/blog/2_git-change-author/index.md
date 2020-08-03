@@ -4,17 +4,19 @@ date: "2020-08-01T22:12:03.284Z"
 description: Googling this yet again?
 ---
 
+## 0. Preface
+
 Switching between work and personal environments can lead to mistakes like this.
 
 I try to automate the switch by having scripts setting up different looks on my terminal for each environment I'm working. Sometimes I just forget though. If you're in this situation, you probably forgot something similar not long ago, and are trying to fix it.
 
 Since I never seem to remember the command to change back a git commit author, and google it everytime, here is my attempt at remembering it for good by writing a post about it.
 
-## Interactive rebase
+## 1. Interactive rebase
 
-First thing to do is rebasing your git history. You have a couple of choices to enter interactive rebase. My favorite one is using a commit count from `head`. 
+First thing to do is rebasing your git history. You have a couple of choices to enter interactive rebase. My favorite one is using a commit count from `head`.
 
-For example, if I want to change the author of the last 3 commits, I can use: 
+For example, if I want to change the author of the last 3 commits, I can use:
 
 ```bash
 git rebase -i HEAD~3
@@ -23,18 +25,20 @@ git rebase -i HEAD~3
 This will give you a similar list:
 
 ```bash
-pick 42e5f88 Disable posts temporarily
-pick f0674a1 Update js array toggle blog post
-pick 376b59c Do not use global graphql import
+pick 42e5f88 Commit #1
+pick f0674a1 Commit #2
+pick 376b59c Commit #3
 ```
 
 For now, just change `pick` to `edit` on the commits you would like to change the author of.
 
 ```bash
-**edit** 42e5f88 Disable posts temporarily
-pick f0674a1 Update js array toggle blog post
-**edit** 376b59c Do not use global graphql import
+edit 42e5f88 Commit #1
+pick f0674a1 Commit #2
+edit 376b59c Commit #3
 ```
+
+Notice the change on the first and the third commits.
 
 To rebase, you could also use the hash of a commit directly:
 
@@ -42,7 +46,7 @@ To rebase, you could also use the hash of a commit directly:
 git rebase -i 42e5f88
 ```
 
-## Actually changing the author
+## 2. Actually changing the author
 
 After saving the open git interactive rebase document is when the rebasing actually starts.
 
