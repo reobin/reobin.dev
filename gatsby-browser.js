@@ -4,4 +4,4 @@ import "typeface-merriweather";
 import "typeface-jetbrains-mono";
 
 import "./src/style/index.css";
-import "./src/style/nord-prism.css";
+import "./src/style/prism.css";
