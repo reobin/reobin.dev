@@ -30,6 +30,12 @@ body {
   --code-string: var(--yellow);
 }
 
+@media only screen and (max-width: 768px) {
+  body {
+    --outline-width: .5rem;
+  }
+}
+
 html,
 body,
 #___gatsby {
@@ -55,7 +61,7 @@ body,
 
 #gatsby-focus-wrapper > * {
   flex-shrink: 0;
-  padding: 1rem;
+  padding: var(--outline-width);
   width: calc(100% - 2 * var(--outline-width));
   max-width: 45rem;
 }
