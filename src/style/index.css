@@ -1,48 +1,63 @@
 body {
-  --black: #374046;
-  --pale-black: #6e7b81;
-  --extra-pale-black: #6e7b81b0;
-  --blue: #4c74b9;
-  --pale-blue: #d2dcee;
-  --pure-white: #fff;
-  --grey: #fafafa;
-  --purple: #9e7096;
-  --green: #78995a;
+  --yellow: #F0DA9E;
+  --yellow-dark: #b0891c;
+  --red: #F9B3B5;
+  --red-dark: #cc3338;
+  --green: #AFC5AE;
+  --green-dark: #546654;
+  --black: #363636;
+  --gray: #e9eaeb;
+  --white: #fff;
 
   --title: var(--black);
-  --text: var(--pale-black);
-  --link: var(--blue);
-  --link-border: var(--pale-blue);
-  --background: var(--pure-white);
+  --text: var(--black);
+  --link: var(--green-dark);
+  --link-border: var(--green);
+  --background: var(--gray);
+
+  --outline-width: 1rem;
+  --outline-color: var(--yellow);
 
   /* Code blocks */
-  --code-word-background: var(--pale-blue);
-  --code-background: var(--grey);
-  --code-text: var(--black);
-  --code-comment: var(--extra-pale-black);
-  --code-primary: var(--blue);
-  --code-secondary: var(---pale-blue);
-  --code-number: var(--purple);
-  --code-string: var(--green);
+  --code-word-background: var(--white);
+  --code-word-text: var(--green-dark);
+  --code-background: var(--black);
+  --code-text: var(--white);
+  --code-comment: var(--gray);
+  --code-primary: var(--green);
+  --code-secondary: var(--red);
+  --code-number: var(--yellow);
+  --code-string: var(--yellow);
 }
 
 html,
 body,
 #___gatsby {
+  width: 100%;
   height: 100%;
 }
 
 #gatsby-focus-wrapper {
-  min-height: 100%;
+  width: calc(100% - 2 * var(--outline-width));
+  min-height: calc(100% - 2 * var(--outline-width));
   display: flex;
   flex-direction: column;
-  max-width: 45rem;
-  margin: 0 auto;
+  align-items: center;
+  border: var(--outline-width) solid;
+  border-image: linear-gradient(
+      to right,
+      var(--green),
+      var(--red) 50%,
+      var(--yellow)
+    )
+    5;
 }
 
 #gatsby-focus-wrapper > * {
   flex-shrink: 0;
   padding: 1rem;
+  width: 100%;
+  max-width: 45rem;
 }
 
 body {
@@ -56,6 +71,10 @@ body {
 main {
   flex: 1;
   overflow: hidden;
+}
+
+img {
+  box-shadow: none !important;
 }
 
 p {
