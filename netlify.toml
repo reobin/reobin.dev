@@ -1,0 +1,13 @@
+[build]
+  publish = "public"
+
+[[plugins]]
+  package = "netlify-plugin-submit-sitemap"
+	[plugins.inputs]
+	baseUrl = "https://reobin.dev"
+	sitemapPath = "/sitemap.xml"
+	providers = [
+		"google",
+		"bing",
+		"yandex"
+	]
