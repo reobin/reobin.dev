@@ -172,7 +172,7 @@ To address this, let's use the [splice](https://developer.mozilla.org/en-US/docs
 
 The `findIndex` function will stop at the first element matching the condition given, so it has the side benefit of not looping through the whole array unless the item is at the last index, or simply not found.
 
-Using `findIndex` means we have to one again reorder stuff a little.
+Using `findIndex` means we have to once again reorder stuff a little.
 
 For our first condition, we'll use the value returned by (`-1` if not found, `index` if found).
 
