@@ -1,4 +1,4 @@
 User-agent: *
-Disallow:
+Allow:
 Sitemap: https://reobin.dev/sitemap.xml
 Host: https://reobin.dev
