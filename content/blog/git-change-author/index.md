@@ -8,13 +8,13 @@ description: Googling this yet again?
 
 Switching between work and personal environments can lead to mistakes like this.
 
-I try to automate the switch by having scripts setting up different looks on my terminal for each environment I'm working. Sometimes I just forget though. If you're in this situation, you probably forgot something similar not long ago, and are trying to fix it.
+I try to automate the switch by having scripts setting up different looks on my terminal for each environment I'm working on. Sometimes I just forget, though. If you're in this situation, you probably forgot something similar not long ago, and are trying to fix it.
 
-Since I never seem to remember the command to change back a git commit author, and google it everytime, here is my attempt at remembering it for good by writing a post about it.
+Since I never seem to remember the command to change back a git commit author, and google it every time, here is my attempt at remembering it for good by writing a post about it.
 
 ## 1. Interactive rebase
 
-First thing to do is rebasing your git history. You have a couple of choices to enter interactive rebase. My favorite one is using a commit count from `head`.
+The first thing to do is rebasing your git history. You have a couple of choices to enter interactive rebase. My favorite one is using a commit count from `head`.
 
 For example, if I want to change the author of the last 3 commits, I can use:
 
