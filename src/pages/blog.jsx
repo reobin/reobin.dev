@@ -9,19 +9,7 @@ const BlogIndex = ({ data, location }) => {
 
   return (
     <Layout location={location}>
-      <SEO title="All posts" />
-      <p>
-        <span className="accent">
-          <strong>Hi!</strong>
-        </span>{" "}
-        I'm a web developer based in Montreal, QC.
-      </p>
-      <p>
-        Below is my attempt at storing stuff permanently in my brain. People say
-        you remember something longer when you write about it.
-      </p>
-      <p>Welcome!</p>
-      <p style={{textAlign: "right"}}>- Robin</p>
+      <SEO title="Blog" />
       {posts.map(({ node }) => {
         const title = node.frontmatter.title || node.fields.slug;
         return (

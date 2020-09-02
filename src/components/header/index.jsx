@@ -29,19 +29,24 @@ const Header = ({ isHome }) => {
       }
     `,
   );
+
   const Title = isHome ? "h1" : "h3";
+
   return (
     <header className={classnames(styles.header, { [styles.home]: isHome })}>
-      <Link className={styles.mainLink} to={`/`}>
-        <Image
-          fixed={avatar.childImageSharp.fixed}
-          alt="avatar"
-          imgStyle={{
-            borderRadius: `50%`,
-          }}
-        />
-        <Title>{title}</Title>
-      </Link>
+      <nav className={styles.nav}>
+        <Link className={styles.mainLink} to={`/`}>
+          <Image
+            fixed={avatar.childImageSharp.fixed}
+            alt="avatar"
+            imgStyle={{
+              borderRadius: `50%`,
+            }}
+          />
+          <Title>{title}</Title>
+        </Link>
+        <Link to="/blog">Blog</Link>
+      </nav>
     </header>
   );
 };

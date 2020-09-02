@@ -77,6 +77,8 @@ body {
 main {
   flex: 1;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 img {
@@ -117,6 +119,7 @@ a {
   padding-bottom: 1px;
   box-shadow: 0 1px 0 0 var(--link-border);
   transition: box-shadow 200ms ease;
+  width: min-content;
 }
 a:hover,
 a:focus {
