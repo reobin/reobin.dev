@@ -1,0 +1,32 @@
+.container {
+  margin-bottom: 1rem;
+}
+
+.container:last-of-type {
+  margin-bottom: 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.body > * + * {
+  margin-top: 0.5rem;
+}
+
+.title {
+  margin: 0;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.meta > * + * {
+  margin-top: 0.5rem;
+}

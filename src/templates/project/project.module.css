@@ -1,0 +1,29 @@
+.project-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+.links > * {
+  width: min-content;
+  white-space: nowrap;
+}
+
+.links > * + * {
+  margin-top: 1rem;
+}
+
+.project-title {
+  margin: 0;
+}
+
+.project-body img {
+  max-width: 100%;
+}

@@ -1,3 +1,6 @@
+.header {
+}
+
 .header h1,
 .header h3 {
   font-size: 2rem;
@@ -15,6 +18,15 @@
 .main-link:hover,
 .main-link:focus {
   box-shadow: none;
+}
+
+.secondary-links {
+  display: flex;
+  align-items: center;
+}
+
+.secondary-links > * + * {
+  margin-left: 1rem;
 }
 
 .nav {

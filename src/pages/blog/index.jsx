@@ -1,10 +1,12 @@
 import React from "react";
 import { Link, graphql } from "gatsby";
 
-import Layout from "../components/layout";
-import SEO from "../components/seo";
+import Layout from "../../components/layout";
+import SEO from "../../components/seo";
 
-const BlogIndex = ({ data, location }) => {
+import styles from "./blog.module.css";
+
+const BlogPage = ({ data, location }) => {
   const posts = data.allMarkdownRemark.edges;
 
   return (
@@ -13,7 +15,7 @@ const BlogIndex = ({ data, location }) => {
       {posts.map(({ node }) => {
         const title = node.frontmatter.title || node.fields.slug;
         return (
-          <article key={node.fields.slug}>
+          <article key={node.fields.slug} className={styles.article}>
             <header>
               <h2
                 className="title"
@@ -41,7 +43,7 @@ const BlogIndex = ({ data, location }) => {
   );
 };
 
-export default BlogIndex;
+export default BlogPage;
 
 export const pageQuery = graphql`
   query {
@@ -50,7 +52,9 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(
+      filter: {fileAbsolutePath: {regex: "/(blog)/.*.md$/"}},
+      sort: { fields: [frontmatter___date], order: DESC }) {
       edges {
         node {
           excerpt

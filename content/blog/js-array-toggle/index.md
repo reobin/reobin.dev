@@ -1,5 +1,5 @@
 ---
-title: How to toggle an item in a javascript array
+title: How to toggle an item in a JavaScript array
 date: "2020-07-01T22:12:03.284Z"
 description: "Quickly add/remove an item, depending on whether it's already in the array or not."
 ---

@@ -2,24 +2,32 @@ const path = require(`path`);
 const { createFilePath } = require(`gatsby-source-filesystem`);
 
 exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions;
-
-  const blogPost = path.resolve(`./src/templates/blog-post.js`);
   const result = await graphql(
     `
       {
-        allMarkdownRemark(
+        blogPosts: allMarkdownRemark(
+          filter: { fileAbsolutePath: { regex: "/(blog)/.*.md$/" } }
           sort: { fields: [frontmatter___date], order: DESC }
-          limit: 1000
         ) {
-          edges {
-            node {
-              fields {
-                slug
-              }
-              frontmatter {
-                title
-              }
+          nodes {
+            fields {
+              slug
+            }
+            frontmatter {
+              title
+            }
+          }
+        }
+        projects: allMarkdownRemark(
+          filter: { fileAbsolutePath: { regex: "/(projects)/.*.md$/" } }
+          sort: { fields: [frontmatter___date], order: DESC }
+        ) {
+          nodes {
+            fields {
+              slug
+            }
+            frontmatter {
+              name
             }
           }
         }
@@ -31,18 +39,34 @@ exports.createPages = async ({ graphql, actions }) => {
     throw result.errors;
   }
 
-  // Create blog posts pages.
-  const posts = result.data.allMarkdownRemark.edges;
+  const { createPage } = actions;
 
-  posts.forEach((post, index) => {
-    const previous = index === posts.length - 1 ? null : posts[index + 1].node;
-    const next = index === 0 ? null : posts[index - 1].node;
+  const blogPostTemplate = path.resolve(`./src/templates/blogPost.jsx`);
+  createCollectionPages(
+    result.data.blogPosts.nodes,
+    blogPostTemplate,
+    createPage,
+  );
+
+  const projectTemplate = path.resolve(`./src/templates/project/index.jsx`);
+  createCollectionPages(
+    result.data.projects.nodes,
+    projectTemplate,
+    createPage,
+  );
+};
+
+const createCollectionPages = (collection, template, createPage) => {
+  collection.forEach((item, index) => {
+    const previous =
+      index === collection.length - 1 ? null : collection[index + 1];
+    const next = index === 0 ? null : collection[index - 1];
 
     createPage({
-      path: post.node.fields.slug,
-      component: blogPost,
+      path: item.fields.slug,
+      component: template,
       context: {
-        slug: post.node.fields.slug,
+        slug: item.fields.slug,
         previous,
         next,
       },
