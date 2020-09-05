@@ -25,6 +25,10 @@
   align-items: center;
 }
 
+.secondary-links > * {
+  white-space: nowrap;
+}
+
 .secondary-links > * + * {
   margin-left: 1rem;
 }

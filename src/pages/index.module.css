@@ -1,7 +1,9 @@
 .hero-content {
   flex: 1;
   display: flex;
-  place-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .intro {

@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "gatsby-image";
 import classnames from "classnames";
 import { Link, graphql } from "gatsby";
 
@@ -15,31 +16,43 @@ const ProjectsPage = ({ data, location }) => {
   return (
     <Layout location={location}>
       <SEO title="Projects" />
-      {projects.map(project => {
-        const name = project.frontmatter.name || project.fields.slug;
-        return (
-          <article key={project.fields.slug} className={styles.container}>
-            <header className={styles.header}>
-              <h2 className={classnames(styles.title, "title")}>
-                <Link style={{ boxShadow: `none` }} to={project.fields.slug}>
-                  {name}
-                </Link>
-              </h2>
-              <StargazersCount
-                count={project.frontmatter.stargazersCount}
-              />
-            </header>
-            <section className={styles.body}>
-              <ProjectStack stack={project.frontmatter.stack} />
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: project.frontmatter.description,
-                }}
-              />
-            </section>
-          </article>
-        );
-      })}
+      <section className={styles.projects}>
+        {projects.map(project => {
+          const name = project.frontmatter.name || project.fields.slug;
+          return (
+            <article key={project.fields.slug} className={styles.project}>
+              {!!project.frontmatter.featuredImage && (
+                <Image
+                  fluid={
+                    project.frontmatter.featuredImage.childImageSharp.fluid
+                  }
+                  alt={`${project.frontmatter.name} featured image`}
+                  className={styles.projectImage}
+                  imgStyle={{ objectFit: "contain", width: "100%" }}
+                />
+              )}
+              <header className={styles.projectHeader}>
+                <div className={styles.projectTitleContainer}>
+                <h2 className={classnames(styles.projectTitle, "title")}>
+                  <Link className={styles.projectLink} to={project.fields.slug}>
+                    {name}
+                  </Link>
+                </h2>
+                <ProjectStack stack={project.frontmatter.stack} />
+              </div>
+                <StargazersCount count={project.frontmatter.stargazersCount} />
+              </header>
+              <div className={styles.projectBody}>
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: project.frontmatter.description,
+                  }}
+                />
+              </div>
+            </article>
+          );
+        })}
+      </section>
     </Layout>
   );
 };
@@ -67,6 +80,13 @@ export const pageQuery = graphql`
           url
           stargazersCount
           stack
+          featuredImage {
+            childImageSharp {
+              fluid(maxWidth: 1200) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
         }
       }
     }

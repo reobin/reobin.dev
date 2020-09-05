@@ -29,14 +29,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
           </p>
         </header>
         <section dangerouslySetInnerHTML={{ __html: post.html }} />
-        <hr
-          style={{
-            marginBottom: "1rem",
-          }}
-        />
-        <footer></footer>
       </article>
-
       <nav>
         <ul
           style={{

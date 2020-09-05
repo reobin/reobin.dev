@@ -4,14 +4,15 @@ description: Find the best vim color schemes around
 slug: vimcolorschemes
 url: https://vimcolorschemes.com
 githubUrl: https://github.com/reobin/vimcolorschemes
+featuredImage: ./demo_light.png
 stargazersCount: 50
 stack: [gatsby, react, python, mongodb, aws]
 date: "2020-09-01T22:12:03.284Z"
 ---
 
-Welcome to vimcolorschemes, the best way to find a new color scheme for your vim setup.
+This is vimcolorschemes, the best way to find a new color scheme for your vim setup.
 
-![demo dark theme](https://github.com/reobin/vimcolorschemes/raw/develop/src/images/demo_dark.png)
+![demo dark theme](./demo_light.png)
 
 ## Backstory
 
@@ -19,11 +20,13 @@ I created vimcolorschemes to solve an old annoyance of mine, which is to find qu
 
 It is definitely a work in progress, and I have many exciting ideas for the future of vimcolorschemes. Follow [the Roadmap over at GitHub](https://github.com/reobin/vimcolorschemes/projects/4).
 
-## Description
+## Core mission
 
-vimcolorschemes is a small constellation of projects working towards the common goal of building the **ultimate resource** for vim users to find the **perfect color scheme** for their development environment.
+In order to become the **ultimate resource** for vim users to find the **perfect color scheme** for their development environment, vimcolorschemes focuses on the following values:
 
-The **focus** here is always on the content. The **simple design** of the website make the color schemes the focal point of every page. **Speed** and **accessibility** are also part of the core mission of vimcolorschemes.
+* Content first
+* Speed
+* Accessibility
 
 ## Key features 🚀
 

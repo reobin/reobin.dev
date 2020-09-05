@@ -1,32 +1,62 @@
-.container {
-  margin-bottom: 1rem;
+.projects {
+  display: flex;
+  flex-direction: column;
 }
 
-.container:last-of-type {
+.project {
+  position: relative;
+  padding: 1rem;
+  margin: -1rem -1rem 2rem -1rem;
+}
+
+.project:last-of-type {
   margin-bottom: 0;
 }
 
-.header {
+.project-link,
+.project-link:hover {
+  box-shadow: none;
+}
+
+.project-link::after {
+  content: " ";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.project-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0.5rem;
 }
 
-.body > * + * {
+.project-body > * + * {
   margin-top: 0.5rem;
 }
 
-.title {
+.project-title {
   margin: 0;
 }
 
-.meta {
+.project-meta {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
 
-.meta > * + * {
+.project-meta > * + * {
   margin-top: 0.5rem;
+}
+
+.project-title-container {
+  display: flex;
+  align-items: center;
+}
+
+.project-title-container > * + * {
+  margin-left: 0.5rem;
 }
