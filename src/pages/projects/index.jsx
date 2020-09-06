@@ -32,15 +32,21 @@ const ProjectsPage = ({ data, location }) => {
                 />
               )}
               <header className={styles.projectHeader}>
-                <div className={styles.projectTitleContainer}>
                 <h2 className={classnames(styles.projectTitle, "title")}>
-                  <Link className={styles.projectLink} to={project.fields.slug}>
+                  <Link
+                    className={styles.projectLink}
+                    to={project.fields.slug}
+                  >
                     {name}
                   </Link>
                 </h2>
-                <ProjectStack stack={project.frontmatter.stack} />
-              </div>
-                <StargazersCount count={project.frontmatter.stargazersCount} />
+                <div className={styles.projectMeta}>
+                  <ProjectStack stack={project.frontmatter.stack} />
+                  <StargazersCount
+                    count={project.frontmatter.stargazersCount}
+                    className={styles.projectStargazersCount}
+                  />
+                </div>
               </header>
               <div className={styles.projectBody}>
                 <p

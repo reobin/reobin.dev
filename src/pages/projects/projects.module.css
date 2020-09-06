@@ -29,9 +29,15 @@
 
 .project-header {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0 0 0.5rem;
+}
+
+.project-meta {
+  width: 100%;
+  display: flex;
   justify-content: space-between;
-  margin-bottom: 0.5rem;
 }
 
 .project-body > * + * {
@@ -39,24 +45,19 @@
 }
 
 .project-title {
-  margin: 0;
+  margin: 0 0 0.5rem;
 }
 
-.project-meta {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.project-meta > * + * {
-  margin-top: 0.5rem;
-}
-
-.project-title-container {
-  display: flex;
-  align-items: center;
-}
-
-.project-title-container > * + * {
-  margin-left: 0.5rem;
+@media only screen and (min-width: 768px) {
+  .project-header {
+    flex-direction: row;
+    align-items: center;
+  }
+  .project-title {
+    margin: 0 0.5rem 0 0;
+  }
+  .project-meta {
+    width: auto;
+    flex: 1;
+  }
 }
