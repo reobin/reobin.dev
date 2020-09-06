@@ -53,8 +53,9 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(
-      filter: {fileAbsolutePath: {regex: "/(blog)/.*.md$/"}},
-      sort: { fields: [frontmatter___date], order: DESC }) {
+      filter: { fileAbsolutePath: { regex: "/(blog)/.*.md$/" } }
+      sort: { fields: [frontmatter___date], order: DESC }
+    ) {
       edges {
         node {
           excerpt

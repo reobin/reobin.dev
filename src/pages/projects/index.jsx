@@ -13,6 +13,9 @@ import styles from "./projects.module.css";
 const ProjectsPage = ({ data, location }) => {
   const { projects } = data.allMarkdownRemark;
 
+  console.log(projects);
+  console.log("hero");
+
   return (
     <Layout location={location}>
       <SEO title="Projects" />
@@ -33,10 +36,7 @@ const ProjectsPage = ({ data, location }) => {
               )}
               <header className={styles.projectHeader}>
                 <h2 className={classnames(styles.projectTitle, "title")}>
-                  <Link
-                    className={styles.projectLink}
-                    to={project.fields.slug}
-                  >
+                  <Link className={styles.projectLink} to={project.fields.slug}>
                     {name}
                   </Link>
                 </h2>

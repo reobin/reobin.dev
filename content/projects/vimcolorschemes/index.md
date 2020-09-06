@@ -5,7 +5,6 @@ slug: vimcolorschemes
 url: https://vimcolorschemes.com
 githubUrl: https://github.com/reobin/vimcolorschemes
 featuredImage: ./demo_light.png
-stargazersCount: 50
 stack: [gatsby, react, python, mongodb, aws]
 date: "2020-09-01T22:12:03.284Z"
 ---
@@ -24,9 +23,9 @@ It is definitely a work in progress, and I have many exciting ideas for the futu
 
 In order to become the **ultimate resource** for vim users to find the **perfect color scheme** for their development environment, vimcolorschemes focuses on the following values:
 
-* Content first
-* Speed
-* Accessibility
+- Content first
+- Speed
+- Accessibility
 
 ## Key features 🚀
 

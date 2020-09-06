@@ -1,4 +1,5 @@
 const path = require(`path`);
+const fetch = require(`node-fetch`);
 const { createFilePath } = require(`gatsby-source-filesystem`);
 
 exports.createPages = async ({ graphql, actions }) => {
@@ -74,7 +75,20 @@ const createCollectionPages = (collection, template, createPage) => {
   });
 };
 
-exports.onCreateNode = ({ node, actions, getNode }) => {
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions;
+  const typeDefs = `
+    type MarkdownRemark implements Node {
+      frontmatter: Frontmatter
+    }
+    type Frontmatter {
+      stargazersCount: Int
+    }
+  `;
+  createTypes(typeDefs);
+};
+
+exports.onCreateNode = async ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
 
   if (node.internal.type === `MarkdownRemark`) {
@@ -84,5 +98,17 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       node,
       value,
     });
+
+    if (node.fileAbsolutePath.match(/(projects)\/.*.md$/)) {
+      try {
+        const githubURL = `https://api.github.com/repos/reobin/${node.frontmatter.name}`;
+        const response = await fetch(githubURL);
+        const data = await response.json();
+        const stargazersCount = data.stargazers_count;
+        if (stargazersCount) node.frontmatter.stargazersCount = stargazersCount;
+      } catch (e) {
+        console.error(e);
+      }
+    }
   }
 };

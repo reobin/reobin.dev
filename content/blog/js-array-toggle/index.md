@@ -58,7 +58,7 @@ Now that the concept is understood, let's go through a primary version of the `t
 const toggle = (arr, item) => {
   if (arr.includes(item)) return remove(arr, item);
   else return add(arr, item);
-}
+};
 ```
 
 Pretty simple. What about the `add` and `remove` functions though?
@@ -83,9 +83,9 @@ Stir it up a little and we now have:
 
 ```jsx
 const toggle = (arr, item) => {
-	if (arr.includes(item)) return arr.filter(i => i !== item);
-	else return [...arr, item];
-}
+  if (arr.includes(item)) return arr.filter(i => i !== item);
+  else return [...arr, item];
+};
 ```
 
 That's not really just it, though.
@@ -148,7 +148,7 @@ const toggle = (arr, item, getValue = item => item) => {
     // array was filtered; item was present; then remove
     return filtered;
   }
-}
+};
 ```
 
 Let's clean it up a little as I don't like clutter, and this is small enough to be readable using some of the javascript quirks.
@@ -157,7 +157,7 @@ Let's clean it up a little as I don't like clutter, and this is small enough to 
 const toggle = (arr, item, getValue = item => item) => {
   const filtered = arr.filter(i => getValue(i) === getValue(item));
   return arr.length === filtered.length ? [...arr, item] : filtered;
-}
+};
 ```
 
 ## A side effect to note
@@ -189,7 +189,7 @@ const removeAtIndex = (arr, index) => {
   const copy = [...arr];
   copy.splice(index, 1);
   return copy;
-}
+};
 ```
 
 I created a whole function to keep the `toggle` function as clean as possible, and have great separation of concerns between our utility function set.
@@ -198,10 +198,10 @@ Here is what our final `toggle` looks like:
 
 ```jsx
 const toggle = (arr, item, getValue = item => item) => {
-	const index = arr.findIndex(i => getValue(i) === getValue(item));
-	if (index === -1) return [...arr, item];
-	return removeAtIndex(arr, index);
-}
+  const index = arr.findIndex(i => getValue(i) === getValue(item));
+  if (index === -1) return [...arr, item];
+  return removeAtIndex(arr, index);
+};
 ```
 
 The reason we create a copy on the array in the `removeAtIndex` function is to avoid mutation. In other words, it is to avoid altering the original array given to the `toggle` function.

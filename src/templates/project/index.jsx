@@ -17,13 +17,7 @@ const ProjectTemplate = ({ data, pageContext, location }) => {
   const {
     project: {
       html,
-      frontmatter: {
-        name,
-        description,
-        url,
-        githubUrl,
-        stargazersCount,
-      },
+      frontmatter: { name, description, url, githubUrl, stargazersCount },
     },
   } = data;
   const { title: siteTitle } = data.site.siteMetadata;
