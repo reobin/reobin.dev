@@ -1,0 +1,12 @@
+.external-link {
+  display: flex;
+  align-items: center;
+}
+
+.external-link > *:last-child {
+  margin-left: 0.1rem;
+}
+
+.external-link-icon {
+  height: 1rem;
+}

@@ -8,6 +8,7 @@
   color: #374046;
   display: flex;
   align-items: center;
+  /* compensate for the transparency of the image */
   margin-left: -0.5rem;
 }
 
@@ -17,8 +18,42 @@
   box-shadow: none;
 }
 
+.secondary-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.secondary-links > * {
+  white-space: nowrap;
+  margin: 0.5rem;
+}
+
 .nav {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
+}
+
+.nav > *:last-child {
+  margin-top: 1rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .nav {
+    flex-direction: row;
+  }
+
+  .nav > *:last-child {
+    margin-top: 0;
+  }
+
+  .secondary-links > * {
+    margin: 0;
+  }
+
+  .secondary-links > * + * {
+    margin-left: 1rem;
+  }
 }

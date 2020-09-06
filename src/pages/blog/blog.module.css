@@ -1,0 +1,7 @@
+.article { 
+  margin-bottom: 2rem;
+}
+
+.article:last-of-type {
+  margin-bottom: 0;
+}

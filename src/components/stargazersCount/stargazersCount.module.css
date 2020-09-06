@@ -1,0 +1,13 @@
+.stargazers-count {
+  display: flex;
+  align-items: center;
+}
+
+.stargazers-count > * + * {
+  margin-left: 0.1rem;
+}
+
+.stargazers-count-icon {
+  width: 1rem;
+  height: 1rem;
+}

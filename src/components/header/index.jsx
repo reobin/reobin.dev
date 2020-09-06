@@ -45,7 +45,10 @@ const Header = ({ isHome }) => {
           />
           <Title>{title}</Title>
         </Link>
-        <Link to="/blog">Blog</Link>
+        <div className={styles.secondaryLinks}>
+          <Link to="/blog">Blog</Link>
+          <Link to="/projects">Open source projects</Link>
+        </div>
       </nav>
     </header>
   );

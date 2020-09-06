@@ -17,15 +17,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
       />
       <article>
         <header>
-          <h1
-            className="title"
-            style={{
-              marginTop: "1rem",
-              marginBottom: 0,
-            }}
-          >
-            {post.frontmatter.title}
-          </h1>
+          <h1 className="title">{post.frontmatter.title}</h1>
           <p
             style={{
               fontSize: "0.80",
@@ -37,14 +29,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
           </p>
         </header>
         <section dangerouslySetInnerHTML={{ __html: post.html }} />
-        <hr
-          style={{
-            marginBottom: "1rem",
-          }}
-        />
-        <footer></footer>
       </article>
-
       <nav>
         <ul
           style={{
