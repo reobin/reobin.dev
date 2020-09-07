@@ -1,5 +1,6 @@
 body {
   --yellow: #f0da9e;
+  --yellow-pale: #efe0b8;
   --yellow-dark: #b0891c;
   --red: #f9b3b5;
   --red-dark: #cc3338;
@@ -14,6 +15,7 @@ body {
   --link: var(--green-dark);
   --link-border: var(--green);
   --background: var(--gray);
+  --quote-background: var(--yellow-pale);
 
   --outline-width: 1rem;
   --outline-color: var(--yellow);
@@ -137,4 +139,15 @@ a:focus {
 
 .accent {
   color: var(--green-dark);
+}
+
+blockquote {
+  background: var(--quote-background);
+  margin: 1rem 0;
+  padding: 1rem 2rem;
+  border-radius: 3px;
+}
+
+blockquote * {
+  margin: 0;
 }
