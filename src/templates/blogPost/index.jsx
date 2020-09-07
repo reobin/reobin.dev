@@ -1,8 +1,11 @@
 import React from "react";
 import { Link, graphql } from "gatsby";
 
-import Layout from "../components/layout";
-import SEO from "../components/seo";
+import Layout from "../../components/layout";
+import SEO from "../../components/seo";
+import ArticleTitle from "../../components/articleTitle";
+
+import styles from "./blogPost.module.css";
 
 const BlogPostTemplate = ({ data, pageContext, location }) => {
   const post = data.markdownRemark;
@@ -15,18 +18,12 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
       />
-      <article>
-        <header>
-          <h1 className="title">{post.frontmatter.title}</h1>
-          <p
-            style={{
-              fontSize: "0.80",
-              display: `block`,
-              marginBottom: "1rem",
-            }}
-          >
-            {post.frontmatter.date}
-          </p>
+      <article className={styles.article}>
+        <header className={styles.articleHeader}>
+          <ArticleTitle
+            title={post.frontmatter.title}
+            date={post.frontmatter.date}
+          />
         </header>
         <section dangerouslySetInnerHTML={{ __html: post.html }} />
       </article>

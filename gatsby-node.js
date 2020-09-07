@@ -42,7 +42,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const { createPage } = actions;
 
-  const blogPostTemplate = path.resolve(`./src/templates/blogPost.jsx`);
+  const blogPostTemplate = path.resolve(`./src/templates/blogPost/index.jsx`);
   createCollectionPages(
     result.data.blogPosts.nodes,
     blogPostTemplate,

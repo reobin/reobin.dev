@@ -8,7 +8,7 @@ description: "The road to the perfect vim/nvim configuration continues..."
 
 The road to the perfect vim/nvim configuration is addictive. I have come to accept that the time I spend configuring my setup will always be greater (much greater) than the time I save using nvim over other text editors. I like to think that I don't use neovim for productivity as much as it makes editing text fun for me, so it all evens out in the end.
 
-It hurts a little to think about it now, but I used to restart nvim everytime I made a change to my `init.vim`. I recently start using a key mapping to reload my nvim config, and it made everything smoother. 
+It hurts a little to think about it now, but I used to restart nvim everytime I made a change to my `init.vim`. I recently start using a key mapping to reload my nvim config, and it made everything smoother.
 
 Pursuing the inachievable goal that is to stop editing my nvim setup has never been easier.
 

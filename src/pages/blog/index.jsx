@@ -1,8 +1,9 @@
 import React from "react";
-import { Link, graphql } from "gatsby";
+import { graphql } from "gatsby";
 
 import Layout from "../../components/layout";
 import SEO from "../../components/seo";
+import ArticleTitle from "../../components/articleTitle";
 
 import styles from "./blog.module.css";
 
@@ -16,21 +17,17 @@ const BlogPage = ({ data, location }) => {
         const title = node.frontmatter.title || node.fields.slug;
         return (
           <article key={node.fields.slug} className={styles.article}>
-            <header>
-              <h2
-                className="title"
-                style={{
-                  marginBottom: "0.25rem",
-                }}
-              >
-                <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                  {title}
-                </Link>
-              </h2>
-              <small>{node.frontmatter.date}</small>
+            <header className={styles.articleHeader}>
+              <ArticleTitle
+                titleTag="h2"
+                linkTo={node.fields.slug}
+                title={title}
+                date={node.frontmatter.date}
+              />
             </header>
             <section>
               <p
+                className={styles.articleDescription}
                 dangerouslySetInnerHTML={{
                   __html: node.frontmatter.description || node.excerpt,
                 }}
