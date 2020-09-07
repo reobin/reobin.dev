@@ -1,11 +1,12 @@
 import React from "react";
-import { Link, graphql } from "gatsby";
+import { graphql } from "gatsby";
 import classnames from "classnames";
 
 import Layout from "../../components/layout";
 import SEO from "../../components/seo";
 import ExternalLink from "../../components/externalLink";
 import StargazersCount from "../../components/stargazersCount";
+import ArticleNav from "../../components/articleNav";
 
 import { IconKey } from "../../icons";
 
@@ -50,32 +51,7 @@ const ProjectTemplate = ({ data, pageContext, location }) => {
         />
         <footer></footer>
       </article>
-      <nav>
-        <ul
-          style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
-            padding: 0,
-          }}
-        >
-          <li>
-            {previous && (
-              <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.name}
-              </Link>
-            )}
-          </li>
-          <li>
-            {next && (
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.name} →
-              </Link>
-            )}
-          </li>
-        </ul>
-      </nav>
+    <ArticleNav next={next} previous={previous} titleFieldName="name" />
     </Layout>
   );
 };
