@@ -26,6 +26,10 @@
   --half-spacing: calc(var(--spacing) / 2);
 
   --transion-duration: 200ms;
+
+  --spinning-border-color-1: var(--yellow);
+  --spinning-border-color-2: var(--green);
+  --spinning-border-color-3: var(--red);
 }
 
 :root.dark {
@@ -33,6 +37,10 @@
   --background: var(--black);
 
   --accent-foreground: var(--green);
+
+  --spinning-border-color-1: var(--red-dark);
+  --spinning-border-color-2: var(--yellow-dark);
+  --spinning-border-color-3: var(--green-dark);
 }
 
 * {
@@ -121,9 +129,9 @@ a:hover {
   background: rgb(2, 0, 36);
   background: linear-gradient(
     90deg,
-    var(--yellow) 0%,
-    var(--green) 35%,
-    var(--red) 100%
+    var(--spinning-border-color-1) 0%,
+    var(--spinning-border-color-2) 35%,
+    var(--spinning-border-color-3) 100%
   );
   z-index: -1;
   animation: spin 5s linear infinite;
