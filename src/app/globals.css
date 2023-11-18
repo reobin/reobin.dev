@@ -45,6 +45,14 @@
   --spinning-border-color-3: var(--green-dark);
 }
 
+@media (max-width: 767px) {
+  :root {
+    --font-size: 14px;
+    --font-size-h1: 32px;
+    --font-size-h2: 24px;
+  }
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
