@@ -23,9 +23,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={font.className}>
         <div id="spinning-border" />
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <div id="content">
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );
