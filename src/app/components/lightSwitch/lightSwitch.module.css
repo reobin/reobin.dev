@@ -1,15 +1,63 @@
-.lightSwitch {
-  font-size: 3.125rem;
-  cursor: pointer;
-  position: relative;
-}
-
-.lightSwitch span {
+.lightSwitch * {
   user-select: none;
 }
 
-.lightSwitch input {
+.lightSwitch {
+  cursor: pointer;
+  position: relative;
+
+  --slider-width: 6rem;
+  --slider-height: 3rem;
+  --slider-background: var(--foreground);
+  --slider-foreground: var(--background);
+  --slider-spacing: 0.25rem;
+
+  --dot-size: calc(var(--slider-height) - var(--slider-spacing) * 2);
+  --icon-size: 1.5rem;
+  --icon-offset: calc((var(--dot-size) - var(--icon-size)) / 2);
+}
+
+.input {
   pointer-events: none;
   position: absolute;
   opacity: 0;
+}
+
+.slider {
+  width: var(--slider-width);
+  height: var(--slider-height);
+  border-radius: var(--slider-height);
+  background: var(--slider-background);
+  transition: 200ms;
+}
+
+.dot {
+  width: var(--dot-size);
+  height: var(--dot-size);
+  border-radius: 50%;
+  background: var(--slider-foreground);
+  position: absolute;
+  top: var(--slider-spacing);
+  left: var(--slider-spacing);
+  transition: 200ms;
+}
+
+.input:checked + .slider > .dot {
+  left: calc(var(--slider-width) - var(--slider-spacing) - var(--dot-size));
+}
+
+.slider > svg {
+  font-size: var(--dot-size);
+  position: absolute;
+  top: 50%;
+  left: calc(
+    var(--slider-width) - var(--slider-spacing) - var(--dot-size) +
+      var(--icon-offset)
+  );
+  transform: translateY(-50%);
+  color: var(--slider-foreground);
+}
+
+.input:checked + .slider > svg {
+  left: calc(var(--slider-spacing) + var(--icon-offset));
 }

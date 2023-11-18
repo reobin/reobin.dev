@@ -73,6 +73,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: 200ms;
 }
 
 body {
@@ -119,6 +120,7 @@ h2 {
 strong {
   font-weight: bold;
   color: var(--accent-color);
+  transition: 200ms;
 }
 
 a {
@@ -127,7 +129,7 @@ a {
   padding-bottom: 1px;
   border-bottom: 1px solid;
   border-color: var(--accent-color-alt);
-  transition: border-color 200ms ease;
+  transition: 200ms;
 }
 
 a:hover {
@@ -150,6 +152,7 @@ a:hover {
   z-index: -1;
   animation: spin 5s linear infinite;
   transform: translate(-50%, -50%);
+  transition: 200ms;
 }
 
 @keyframes spin {
