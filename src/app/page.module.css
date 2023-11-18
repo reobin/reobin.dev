@@ -5,9 +5,3 @@
   height: 100%;
   text-align: center;
 }
-
-@media (max-width: 767px) {
-  .home h1 {
-    max-width: 90%;
-  }
-}
