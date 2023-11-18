@@ -1,0 +1,12 @@
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--spacing) 0;
+  margin: 0 var(--spacing);
+}
+
+.footerContent {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--half-spacing);
+}
