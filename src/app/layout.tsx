@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Merriweather } from 'next/font/google';
 
 import Header from '@/app/components/header';
 import Footer from '@/app/components/footer';
@@ -7,7 +7,7 @@ import Footer from '@/app/components/footer';
 import './reset.css';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+const font = Merriweather({ weight: '400', subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'reobin.dev',
@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={font.className}>
         <div id="spinning-border" />
         <Header />
         <main>{children}</main>

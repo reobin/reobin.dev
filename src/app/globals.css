@@ -1,9 +1,7 @@
 :root {
   --font-size: 16px;
-  --font-size-title: 24px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  --font-size-h1: 48px;
+  --font-size-h2: 32px;
 
   --yellow: #f0da9e;
   --yellow-pale: #efe0b8;
@@ -24,6 +22,8 @@
 
   --spacing: 1rem;
   --half-spacing: calc(var(--spacing) / 2);
+
+  --transion-duration: 200ms;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -51,13 +51,9 @@ body {
 }
 
 body {
+  font-size: var(--font-size);
   color: var(--foreground);
   padding: var(--spacing) 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -87,6 +83,31 @@ footer {
 
 main {
   flex: 1;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+}
+h2 {
+  font-size: var(--font-size-h2);
+}
+
+strong {
+  font-weight: bold;
+  color: var(--green-dark);
+}
+
+a {
+  color: var(--green-dark);
+  text-decoration: none;
+  padding-bottom: 1px;
+  border-bottom: 1px solid;
+  border-color: var(--green);
+  transition: border-color 200ms ease;
+}
+
+a:hover {
+  border-color: var(--green-dark);
 }
 
 #spinning-border {

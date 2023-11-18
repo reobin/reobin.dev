@@ -1,8 +1,6 @@
 .header {
   display: flex;
   align-items: center;
-  column-gap: var(--half-spacing);
-  font-size: var(--font-size-title);
   font-weight: bold;
 }
 
