@@ -1,4 +1,13 @@
 .header {
   padding: var(--spacing) 0;
   margin: 0 var(--spacing);
+  display: flex;
+  align-items: center;
+  column-gap: var(--half-spacing);
+  font-size: var(--font-size-title);
+  font-weight: bold;
+}
+
+.header img {
+  border-radius: 50%;
 }

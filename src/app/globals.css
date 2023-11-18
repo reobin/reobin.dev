@@ -1,12 +1,13 @@
 :root {
   --font-size: 16px;
+  --font-size-title: 24px;
   --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
     'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
     'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
   --foreground-rgb: 0, 0, 0;
   --background-rgb: 255, 255, 255;
-  
+
   --max-content-width: 50rem;
   --border-radius: 12px;
 
@@ -54,7 +55,9 @@ a {
   }
 }
 
-header, main, footer {
+header,
+main,
+footer {
   width: 100%;
   max-width: var(--max-content-width);
 }
