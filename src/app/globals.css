@@ -59,6 +59,11 @@
   margin: 0;
 }
 
+*::selection {
+  background: var(--accent-color);
+  color: var(--background);
+}
+
 html,
 body {
   width: 100%;
