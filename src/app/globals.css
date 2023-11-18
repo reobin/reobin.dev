@@ -17,6 +17,8 @@
   --foreground: var(--black);
   --background: var(--gray);
 
+  --accent-foreground: var(--green-dark);
+
   --max-content-width: 50rem;
   --border-radius: 12px;
 
@@ -30,6 +32,8 @@
   :root {
     --foreground: var(--gray);
     --background: var(--black);
+
+    --accent-foreground: var(--green);
   }
 }
 
@@ -94,11 +98,11 @@ h2 {
 
 strong {
   font-weight: bold;
-  color: var(--green-dark);
+  color: var(--accent-foreground);
 }
 
 a {
-  color: var(--green-dark);
+  color: var(--accent-foreground);
   text-decoration: none;
   padding-bottom: 1px;
   border-bottom: 1px solid;
@@ -125,6 +129,7 @@ a:hover {
   );
   z-index: -1;
   animation: spin 5s linear infinite;
+  transform: translate(-50%, -50%);
 }
 
 @keyframes spin {
