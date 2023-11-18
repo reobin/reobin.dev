@@ -4,6 +4,10 @@
   position: relative;
 }
 
+.lightSwitch * {
+  user-select: none;
+}
+
 .lightSwitch input {
   pointer-events: none;
   position: absolute;
