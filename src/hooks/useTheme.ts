@@ -18,8 +18,11 @@ function useTheme(): UseThemeData {
   const defaultTheme = getDefaultThemeData();
   const [theme, setTheme] = useState<Themes>(defaultTheme);
 
-  const darkModeMediaQuery = window.matchMedia(DARK_MODE_MEDIA_QUERY);
-  darkModeMediaQuery.addEventListener('change', () => {
+  const darkModeMediaQuery =
+    typeof window !== 'undefined'
+      ? window.matchMedia(DARK_MODE_MEDIA_QUERY)
+      : null;
+  darkModeMediaQuery?.addEventListener('change', () => {
     const newTheme = darkModeMediaQuery.matches ? Themes.Dark : Themes.Light;
     if (theme === newTheme) return;
     assignTheme(newTheme);
@@ -31,6 +34,11 @@ function useTheme(): UseThemeData {
 
   function assignTheme(theme: Themes) {
     setTheme(theme);
+    storeTheme(theme);
+  }
+
+  function storeTheme(theme: Themes) {
+    if (typeof window === 'undefined') return;
 
     if (theme === getSystemPreferenceTheme()) {
       localStorage.removeItem('theme');
@@ -63,7 +71,8 @@ function getDefaultThemeData(): Themes {
  * @returns {Themes | null} The stored theme or null if there is no stored theme.
  */
 function getStoredTheme(): Themes | null {
-  return localStorage.getItem('theme') as Themes | null;
+  if (typeof window === 'undefined') return null;
+  return localStorage?.getItem('theme') as Themes | null;
 }
 
 /**
@@ -72,6 +81,7 @@ function getStoredTheme(): Themes | null {
  * @returns {Themes} The theme based on the user's system preferences.
  */
 function getSystemPreferenceTheme(): Themes {
+  if (typeof window === 'undefined') return Themes.Light;
   const prefersDarkMode = window.matchMedia(DARK_MODE_MEDIA_QUERY).matches;
   return prefersDarkMode ? Themes.Dark : Themes.Light;
 }
