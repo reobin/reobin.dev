@@ -1,10 +1,10 @@
 .lightSwitch {
-  font-size: 2rem;
+  font-size: 3.125rem;
   cursor: pointer;
   position: relative;
 }
 
-.lightSwitch * {
+.lightSwitch span {
   user-select: none;
 }
 
