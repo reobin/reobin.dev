@@ -28,13 +28,11 @@
   --transion-duration: 200ms;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground: var(--gray);
-    --background: var(--black);
+:root.dark {
+  --foreground: var(--gray);
+  --background: var(--black);
 
-    --accent-foreground: var(--green);
-  }
+  --accent-foreground: var(--green);
 }
 
 * {

@@ -1,0 +1,11 @@
+.lightSwitch {
+  font-size: 2rem;
+  cursor: pointer;
+  position: relative;
+}
+
+.lightSwitch input {
+  pointer-events: none;
+  position: absolute;
+  opacity: 0;
+}
