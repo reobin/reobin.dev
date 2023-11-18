@@ -17,7 +17,8 @@
   --foreground: var(--black);
   --background: var(--gray);
 
-  --accent-foreground: var(--green-dark);
+  --accent-color: var(--green-dark);
+  --accent-color-alt: var(--green);
 
   --max-content-width: 50rem;
   --border-radius: 12px;
@@ -36,7 +37,8 @@
   --foreground: var(--gray);
   --background: var(--black);
 
-  --accent-foreground: var(--green);
+  --accent-color: var(--yellow);
+  --accent-color-alt: var(--yellow-dark);
 
   --spinning-border-color-1: var(--red-dark);
   --spinning-border-color-2: var(--yellow-dark);
@@ -104,20 +106,20 @@ h2 {
 
 strong {
   font-weight: bold;
-  color: var(--accent-foreground);
+  color: var(--accent-color);
 }
 
 a {
-  color: var(--accent-foreground);
+  color: var(--accent-color);
   text-decoration: none;
   padding-bottom: 1px;
   border-bottom: 1px solid;
-  border-color: var(--green);
+  border-color: var(--accent-color-alt);
   transition: border-color 200ms ease;
 }
 
 a:hover {
-  border-color: var(--green-dark);
+  border-color: var(--accent-color);
 }
 
 #spinning-border {
