@@ -17,6 +17,11 @@
   --icon-offset: calc((var(--dot-size) - var(--icon-size)) / 2);
 }
 
+.lightSwitch:focus-within {
+  outline: 5px solid var(--accent-color-alt);
+  border-radius: var(--slider-height);
+}
+
 .input {
   pointer-events: none;
   position: absolute;

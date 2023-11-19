@@ -132,7 +132,8 @@ a {
   transition: 200ms;
 }
 
-a:hover {
+a:hover,
+a:focus {
   border-color: var(--accent-color);
 }
 
