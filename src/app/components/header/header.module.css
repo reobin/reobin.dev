@@ -13,3 +13,13 @@
 .title img {
   border-radius: 50%;
 }
+
+.title a {
+  border: none;
+  color: var(--foreground);
+}
+
+.title a:hover,
+.title a:focus-visible {
+  color: var(--accent-color);
+}
