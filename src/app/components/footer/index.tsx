@@ -1,3 +1,5 @@
+import IconGithub from '../icons/github';
+
 import styles from './footer.module.css';
 
 function Footer() {
@@ -5,7 +7,7 @@ function Footer() {
     <footer className={styles.footer}>
       <div className={styles.footerContent}>
         <a href="https://github.com/reobin" target="_blank">
-          Follow my work on Github
+          Follow my work on Github <IconGithub />
         </a>
         <span>
           Contact me at <a href="mailto:me@reobin.dev">me@reobin.dev</a>

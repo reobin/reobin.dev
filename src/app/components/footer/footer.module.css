@@ -10,3 +10,9 @@
   row-gap: var(--half-spacing);
   text-align: right;
 }
+
+.footerContent * {
+  display: flex;
+  align-items: center;
+  column-gap: var(--half-spacing);
+}
