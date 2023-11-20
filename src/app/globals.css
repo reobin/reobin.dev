@@ -25,6 +25,7 @@
 
   --spacing: 1rem;
   --half-spacing: calc(var(--spacing) / 2);
+  --quarter-spacing: calc(var(--half-spacing) / 2);
 
   --transion-duration: 200ms;
 

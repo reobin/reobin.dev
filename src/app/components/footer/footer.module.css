@@ -14,5 +14,10 @@
 .footerContent * {
   display: flex;
   align-items: center;
-  column-gap: var(--half-spacing);
+  column-gap: var(--quarter-spacing);
+}
+
+.footerContent svg {
+  width: 1.25rem;
+  height: 1.25rem;
 }
