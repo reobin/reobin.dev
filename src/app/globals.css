@@ -135,6 +135,7 @@ a {
 
 a:hover,
 a:focus {
+  outline: none;
   border-color: var(--accent-color);
 }
 
