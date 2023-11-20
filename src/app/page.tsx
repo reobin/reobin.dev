@@ -1,6 +1,6 @@
 import styles from './page.module.css';
 
-export default function Home() {
+function Home() {
   return (
     <div className={styles.home}>
       <h1>
@@ -10,3 +10,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;
