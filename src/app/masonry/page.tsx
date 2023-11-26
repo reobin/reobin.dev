@@ -5,11 +5,11 @@ import styles from './masonry.module.css';
 const COLORS = [
   'yellow',
   'green',
+  'white',
   'yellow-dark',
   'red-dark',
   'yellow-pale',
   'green-dark',
-  'white',
   'red',
   'foreground',
 ];

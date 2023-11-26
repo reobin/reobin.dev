@@ -1,7 +1,7 @@
 :root {
-  --font-size: 16px;
-  --font-size-h1: 48px;
-  --font-size-h2: 32px;
+  --font-size: 14px;
+  --font-size-h1: 32px;
+  --font-size-h2: 24px;
 
   --yellow: #f0da9e;
   --yellow-pale: #efe0b8;
@@ -46,11 +46,11 @@
   --spinning-border-color-3: var(--green-dark);
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   :root {
-    --font-size: 14px;
-    --font-size-h1: 32px;
-    --font-size-h2: 24px;
+    --font-size: 16px;
+    --font-size-h1: 48px;
+    --font-size-h2: 32px;
   }
 }
 

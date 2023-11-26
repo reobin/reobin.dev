@@ -6,7 +6,7 @@
   cursor: pointer;
   position: relative;
 
-  --slider-width: 5rem;
+  --slider-width: 3rem;
   --slider-height: calc(var(--slider-width) / 2);
   --slider-background: var(--foreground);
   --slider-foreground: var(--background);
@@ -17,9 +17,9 @@
   --icon-offset: calc((var(--dot-size) - var(--icon-size)) / 2);
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   .container {
-    --slider-width: 3rem;
+    --slider-width: 5rem;
   }
 }
 
