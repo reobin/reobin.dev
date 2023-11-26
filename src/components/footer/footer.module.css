@@ -1,9 +1,9 @@
-.footer {
+.container {
   display: flex;
   justify-content: flex-end;
 }
 
-.footerContent {
+.content {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -11,13 +11,13 @@
   text-align: right;
 }
 
-.footerContent * {
+.content * {
   display: flex;
   align-items: center;
   column-gap: var(--quarter-spacing);
 }
 
-.footerContent svg {
+.content svg {
   width: 1.25rem;
   height: 1.25rem;
 }

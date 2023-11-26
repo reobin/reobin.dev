@@ -1,8 +1,8 @@
-.lightSwitch * {
+.container * {
   user-select: none;
 }
 
-.lightSwitch {
+.container {
   cursor: pointer;
   position: relative;
 
@@ -17,13 +17,13 @@
   --icon-offset: calc((var(--dot-size) - var(--icon-size)) / 2);
 }
 
-@media (max-width: 767px) {
-  .lightSwitch {
+@media (max-width: 768px) {
+  .container {
     --slider-width: 3rem;
   }
 }
 
-.lightSwitch:focus-within {
+.container:focus-within {
   outline: 5px solid var(--accent-color-alt);
   border-radius: var(--slider-height);
 }

@@ -2,8 +2,8 @@
 
 import useTheme from '@/hooks/useTheme';
 
-import IconMoon from '@/app/components/icons/moon';
-import IconSun from '@/app/components/icons/sun';
+import IconMoon from '@/components/icons/moon';
+import IconSun from '@/components/icons/sun';
 
 import styles from './lightSwitch.module.css';
 
@@ -12,7 +12,7 @@ function LightSwitch() {
 
   return (
     <label
-      className={styles.lightSwitch}
+      className={styles.container}
       title={`Turn on ${isDark ? 'light' : 'dark'} mode`}
     >
       <input

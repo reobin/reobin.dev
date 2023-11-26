@@ -46,7 +46,7 @@
   --spinning-border-color-3: var(--green-dark);
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   :root {
     --font-size: 14px;
     --font-size-h1: 32px;
@@ -109,6 +109,7 @@ footer {
 
 main {
   flex: 1;
+  overflow-y: auto;
 }
 
 h1 {
@@ -165,4 +166,32 @@ a:focus {
   100% {
     transform: translate(-50%, -50%) rotate(360deg);
   }
+}
+
+.yellow {
+  background: var(--yellow);
+}
+.yellow-pale {
+  background: var(--yellow-pale);
+}
+.yellow-dark {
+  background: var(--yellow-dark);
+}
+.red {
+  background: var(--red);
+}
+.red-dark {
+  background: var(--red-dark);
+}
+.green {
+  background: var(--green);
+}
+.green-dark {
+  background: var(--green-dark);
+}
+.black {
+  background: var(--black);
+}
+.gray {
+  background: var(--gray);
 }

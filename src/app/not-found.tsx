@@ -6,7 +6,7 @@ import styles from './not-found.module.css';
 
 function NotFound() {
   return (
-    <div className={styles.notFound}>
+    <div className={styles.container}>
       <h1>
         <strong>404</strong>
         <br />
