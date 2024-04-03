@@ -36,9 +36,9 @@ const { title } = Astro.props;
 
 <style is:global>
   :root {
-    --font-size: 16px;
-    --font-size-h1: 3rem;
-    --font-size-h2: 2rem;
+    --font-size: 14px;
+    --font-size-h1: 24px;
+    --font-size-h2: 32px;
     --font-family: 'Archivo', sans-serif;
     --font-family-serif: 'Merriweather', serif;
 
@@ -207,6 +207,9 @@ const { title } = Astro.props;
 
   @media (min-width: 768px) {
     :root {
+      --font-size: 16px;
+      --font-size-h1: 48px;
+      --font-size-h2: 32px;
       --layout-spacing: var(--spacing-4);
     }
   }
