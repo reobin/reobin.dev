@@ -1,0 +1,37 @@
+---
+import IconGithub from './icons/Github.astro';
+---
+
+<footer>
+  <div>
+    Follow my work on
+    <a href="https://github.com/reobin" target="_blank">
+      Github
+      <IconGithub class="icon" />
+    </a>
+  </div>
+  <div>
+    Contact me at
+    <a href="mailto:me@reobin.dev">me@reobin.dev</a>
+  </div>
+</footer>
+
+<style>
+  footer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    row-gap: var(--spacing-1);
+  }
+
+  a {
+    display: inline-flex;
+    align-items: flex-end;
+    column-gap: calc(var(--spacing-1) / 2);
+  }
+
+  .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+</style>
