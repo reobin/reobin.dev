@@ -19,7 +19,7 @@
     "@astrojs/check": "^0.7.0",
     "@fontsource/archivo": "^5.0.18",
     "@fontsource/merriweather": "^5.0.13",
-    "astro": "^4.10.3",
+    "astro": "^4.11.0",
     "geist": "^1.3.0",
     "typescript": "^5.4.5"
   },
