@@ -3,6 +3,7 @@ import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 
 import '@fontsource/merriweather';
+import merriweatherWoff2 from '@fontsource/merriweather/files/merriweather-latin-400-normal.woff2';
 
 import '@/styles/reset.css';
 
@@ -23,6 +24,13 @@ const { title } = Astro.props;
     />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href={merriweatherWoff2}
+      crossorigin="anonymous"
+    />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
