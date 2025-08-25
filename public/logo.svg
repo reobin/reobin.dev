@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="300" height="285">
-  <path d="M75 45h135v15h15v90h-30v30h15v15h15v90H105v-75h15v-15H90V90H60V60h15V45Z" fill="#FEDCB3"/>
-  <path d="M75 45h135v15h15v90h-15v-45h-30V90H60V60h15V45Z" fill="#6D3E0A"/>
-  <path d="M195 180h15v15h15v90H105v-75h15v-15h15v45h15v15h30v-15h15v-60Z" fill="gray"/>
-  <path d="M135 225h60v15h-15v15h-30v-15h-15v-15Z" fill="#FFF"/>
-  <path d="M150 255h30v30h-30v-30Z" fill="#707070"/>
-</svg>
