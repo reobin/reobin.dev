@@ -12,8 +12,8 @@ importers:
         specifier: ^0.9.4
         version: 0.9.4(prettier-plugin-astro@0.14.1)(prettier@3.6.2)(typescript@5.9.2)
       '@fontsource/merriweather':
-        specifier: ^5.2.10
-        version: 5.2.10
+        specifier: ^5.2.11
+        version: 5.2.11
       astro:
         specifier: ^5.13.7
         version: 5.13.7(@types/node@24.4.0)(rollup@4.39.0)(typescript@5.9.2)(yaml@2.7.0)
@@ -268,8 +268,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@fontsource/merriweather@5.2.10':
-    resolution: {integrity: sha512-jZFajhfv5K8BSz8SVXY450BPa3C/WBYXwCHehi9sdqSsfEo9k4GorNidPX2CViNTnBqg6kt+3+D/oricLD5uDg==}
+  '@fontsource/merriweather@5.2.11':
+    resolution: {integrity: sha512-ZiIMeUh5iT8d73o6xlSF8GKgjV5pgiFrufYc5jZTVAfExtWKqM2vQHnsqXSFMv4ELhAcjt6Vf+5T3oVGXhAizQ==}
 
   '@img/sharp-darwin-arm64@0.34.3':
     resolution: {integrity: sha512-ryFMfvxxpQRsgZJqBd4wsttYQbCxsJksrv9Lw/v798JcQ8+w84mBWuXwl+TT0WJ/WrYOLaYpwQXi3sA9nTIaIg==}
@@ -2072,7 +2072,7 @@ snapshots:
   '@esbuild/win32-x64@0.25.2':
     optional: true
 
-  '@fontsource/merriweather@5.2.10': {}
+  '@fontsource/merriweather@5.2.11': {}
 
   '@img/sharp-darwin-arm64@0.34.3':
     optionalDependencies:
