@@ -15,7 +15,7 @@
     "format.check": "prettier --check ."
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
+    "@astrojs/check": "^0.9.5",
     "@fontsource/merriweather": "^5.2.10",
     "astro": "^5.13.7",
     "typescript": "^5.9.2"
