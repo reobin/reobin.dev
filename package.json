@@ -12,7 +12,10 @@
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier --write .",
-    "format.check": "prettier --check ."
+    "format.check": "prettier --check .",
+    "tc": "astro check",
+    "check": "pnpm run --parallel \"/^(format\\.check|tc)$/\"",
+    "check.fix": "pnpm format && pnpm tc"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
