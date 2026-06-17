@@ -20,6 +20,7 @@
   "dependencies": {
     "@astrojs/check": "^0.9.9",
     "@fontsource/merriweather": "^5.2.11",
+    "@fontsource/press-start-2p": "^5.2.7",
     "astro": "^6.4.2",
     "typescript": "^6.0.3"
   },

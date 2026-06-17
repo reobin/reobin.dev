@@ -1,21 +1,564 @@
 ---
 import Layout from '@/components/Layout.astro';
+import MatrixBackdrop from '@/components/MatrixBackdrop.astro';
+
+import '@fontsource/press-start-2p/latin.css';
 ---
 
-<Layout title="reobin.dev">
-  <main>
-    <h1><strong>Hello!</strong> I'm Robin.<br />I code and brew coffee.</h1>
+<Layout title="reobin.dev" immersive>
+  <main class="gameboy-page">
+    <section class="lcd" aria-label="reobin.dev" data-backdrop="dither">
+      <div class="lcd-shade"></div>
+
+      <MatrixBackdrop />
+
+      <div class="backdrop-switch" aria-label="screen background">
+        <span class="backdrop-switch-label">bg</span>
+        <button
+          type="button"
+          class="backdrop-choice is-active"
+          data-backdrop-option="dither"
+          aria-pressed="true">fog</button
+        >
+        <button
+          type="button"
+          class="backdrop-choice"
+          data-backdrop-option="stars"
+          aria-pressed="false">stars</button
+        >
+        <button
+          type="button"
+          class="backdrop-choice"
+          data-backdrop-option="circuit"
+          aria-pressed="false">circuit</button
+        >
+        <button
+          type="button"
+          class="backdrop-choice"
+          data-backdrop-option="tiles"
+          aria-pressed="false">tiles</button
+        >
+      </div>
+
+      <section class="dialogue-panel" aria-labelledby="intro-heading">
+        <div class="portrait" aria-hidden="true">
+          <img src="/avatar-gameboy-64.png" alt="" class="avatar" />
+        </div>
+
+        <div class="dialogue-copy">
+          <h1 id="intro-heading">
+            hey, i'm reobin.<br />i like code, and coffee.
+          </h1>
+
+          <nav class="choice-menu" aria-label="Contact">
+            <a
+              href="https://github.com/reobin"
+              target="_blank"
+              rel="noreferrer"
+              class="game-link is-selected"
+              data-shortcut="g"
+            >
+              <span class="choice-cursor" aria-hidden="true">▶</span>
+              <span class="link-label">github</span>
+            </a>
+            <a href="mailto:hey@reobin.dev" class="game-link" data-shortcut="e">
+              <span class="choice-cursor" aria-hidden="true">▶</span>
+              <span class="link-label">email</span>
+            </a>
+          </nav>
+        </div>
+      </section>
+    </section>
   </main>
 </Layout>
 
+<script>
+  const links = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>('.game-link'),
+  );
+  const lcd = document.querySelector<HTMLElement>('.lcd');
+  const backdropChoices = Array.from(
+    document.querySelectorAll<HTMLButtonElement>('[data-backdrop-option]'),
+  );
+  const backdropOptionNames = new Set(
+    backdropChoices
+      .map(choice => choice.dataset.backdropOption)
+      .filter(Boolean),
+  );
+  const backdropStorageKey = 'reobin-screen-backdrop';
+
+  let selectedLink = Math.max(
+    0,
+    links.findIndex(link => link.classList.contains('is-selected')),
+  );
+
+  const setSelectedLink = (index: number, focus = false) => {
+    if (links.length === 0) return;
+
+    selectedLink = (index + links.length) % links.length;
+
+    links.forEach((link, linkIndex) => {
+      link.classList.toggle('is-selected', linkIndex === selectedLink);
+    });
+
+    if (focus) {
+      links[selectedLink].focus();
+    }
+  };
+
+  const activateLink = (link: HTMLAnchorElement) => {
+    if (link.target === '_blank') {
+      window.open(link.href, '_blank', 'noopener,noreferrer');
+      return;
+    }
+
+    window.location.href = link.href;
+  };
+
+  links.forEach((link, index) => {
+    link.addEventListener('focus', () => setSelectedLink(index));
+    link.addEventListener('mouseenter', () => setSelectedLink(index));
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.metaKey || event.ctrlKey || event.altKey) return;
+
+    const eventTarget =
+      event.target instanceof HTMLElement ? event.target : null;
+
+    if (eventTarget?.closest('.backdrop-switch')) return;
+
+    const key = event.key.toLowerCase();
+
+    if (key === 'arrowup' || key === 'arrowleft' || key === 'k') {
+      event.preventDefault();
+      setSelectedLink(selectedLink - 1, true);
+      return;
+    }
+
+    if (key === 'arrowdown' || key === 'arrowright' || key === 'j') {
+      event.preventDefault();
+      setSelectedLink(selectedLink + 1, true);
+      return;
+    }
+
+    if (key === 'enter' || key === ' ') {
+      event.preventDefault();
+      activateLink(links[selectedLink]);
+      return;
+    }
+
+    const shortcutLink = links.find(link => link.dataset.shortcut === key);
+    if (shortcutLink) {
+      event.preventDefault();
+      setSelectedLink(links.indexOf(shortcutLink), true);
+      activateLink(shortcutLink);
+    }
+  });
+
+  const setBackdrop = (backdrop: string) => {
+    if (!lcd || !backdropOptionNames.has(backdrop)) return;
+
+    lcd.dataset.backdrop = backdrop;
+
+    backdropChoices.forEach(choice => {
+      const isActive = choice.dataset.backdropOption === backdrop;
+
+      choice.classList.toggle('is-active', isActive);
+      choice.setAttribute('aria-pressed', String(isActive));
+    });
+
+    window.localStorage.setItem(backdropStorageKey, backdrop);
+  };
+
+  const savedBackdrop = window.localStorage.getItem(backdropStorageKey);
+  setBackdrop(
+    savedBackdrop && backdropOptionNames.has(savedBackdrop)
+      ? savedBackdrop
+      : (lcd?.dataset.backdrop ?? 'dither'),
+  );
+
+  backdropChoices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      const backdrop = choice.dataset.backdropOption;
+
+      if (backdrop) {
+        setBackdrop(backdrop);
+      }
+    });
+  });
+</script>
+
 <style>
-  main {
+  :global(body.immersive) {
+    min-height: 100dvh;
+    overflow: hidden;
+    color: #2e3525;
+    background: #8f9d75;
+  }
+
+  .gameboy-page {
+    --gb-px: 2px;
+    --avatar-size: calc(var(--gb-px) * 48);
+    --lcd-columns: 360;
+    --lcd-rows: 240;
+    --dialogue-columns: 320;
+    --game-text-size: clamp(0.78rem, calc(var(--gb-px) * 4.4), 1.18rem);
+    --lcd: #b9c79c;
+    --lcd-panel: #c5d1a8;
+    --ink: #2e3525;
+    --ink-soft: #5c6648;
+    --pixel-font: 'Press Start 2P', ui-monospace, SFMono-Regular, monospace;
+
+    display: grid;
+    place-items: stretch;
+    min-height: 100dvh;
+    background: #8f9d75;
+    font-family: var(--pixel-font);
+  }
+
+  @media (min-width: 700px) {
+    .gameboy-page {
+      --gb-px: 3px;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .gameboy-page {
+      place-items: center;
+      padding: calc(var(--gb-px) * 10);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .gameboy-page {
+      --gb-px: 4px;
+    }
+  }
+
+  @media (min-width: 1800px) {
+    .gameboy-page {
+      --gb-px: 5px;
+      --lcd-columns: 320;
+      --lcd-rows: 196;
+      --dialogue-columns: 236;
+    }
+  }
+
+  @media (max-height: 760px) and (min-width: 900px) {
+    .gameboy-page {
+      --gb-px: 3px;
+    }
+  }
+
+  .lcd {
+    position: relative;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: calc(var(--gb-px) * 8);
+    width: 100%;
+    min-height: 100dvh;
+    padding: calc(var(--gb-px) * 10);
+    overflow: hidden;
+    background: var(--lcd);
+    box-shadow:
+      inset 0 0 calc(var(--gb-px) * 22) rgba(46, 53, 37, 0.28),
+      inset 0 0 0 var(--gb-px) rgba(255, 255, 255, 0.1);
+    isolation: isolate;
+  }
+
+  @media (min-width: 900px) {
+    .lcd {
+      width: min(100%, calc(var(--gb-px) * var(--lcd-columns)));
+      min-height: auto;
+      height: min(
+        calc(100dvh - var(--gb-px) * 20),
+        calc(var(--gb-px) * var(--lcd-rows))
+      );
+      outline: var(--gb-px) solid rgba(46, 53, 37, 0.42);
+    }
+  }
+
+  .lcd::before,
+  .lcd::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 8;
+  }
+
+  .lcd::before {
+    opacity: 0.68;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        rgba(46, 53, 37, 0.08) 0,
+        rgba(46, 53, 37, 0.08) 1px,
+        transparent 1px,
+        transparent var(--gb-px)
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba(46, 53, 37, 0.06) 0,
+        rgba(46, 53, 37, 0.06) 1px,
+        transparent 1px,
+        transparent var(--gb-px)
+      );
+  }
+
+  .lcd::after {
+    background: radial-gradient(
+      circle at 50% 45%,
+      transparent 50%,
+      rgba(46, 53, 37, 0.17)
+    );
+    mix-blend-mode: multiply;
+  }
+
+  .lcd-shade {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(120deg, rgba(255, 255, 255, 0.14), transparent 22%),
+      radial-gradient(
+        circle at 50% 35%,
+        rgba(197, 209, 168, 0.42),
+        transparent 46%
+      );
+    pointer-events: none;
+  }
+
+  .backdrop-switch {
+    position: relative;
+    z-index: 6;
+    grid-row: 1;
+    align-self: start;
+    justify-self: end;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: end;
+    gap: calc(var(--gb-px) * 2);
+    max-width: min(100%, calc(var(--gb-px) * 148));
+    padding: calc(var(--gb-px) * 2);
+    border: var(--gb-px) solid rgba(46, 53, 37, 0.62);
+    background: rgba(197, 209, 168, 0.68);
+  }
+
+  .backdrop-switch-label,
+  .backdrop-choice {
+    display: grid;
+    place-items: center;
+    min-height: calc(var(--gb-px) * 8);
+    color: var(--ink);
+    font-family: var(--pixel-font);
+    font-size: clamp(0.42rem, calc(var(--gb-px) * 2.35), 0.68rem);
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  .backdrop-switch-label {
+    padding-inline: calc(var(--gb-px) * 1);
+    color: var(--ink-soft);
+  }
+
+  .backdrop-choice {
+    appearance: none;
+    min-width: calc(var(--gb-px) * 22);
+    margin: 0;
+    padding: calc(var(--gb-px) * 2) calc(var(--gb-px) * 2);
+    border: var(--gb-px) solid transparent;
+    border-radius: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .backdrop-choice.is-active {
+    border-color: var(--ink);
+    background: rgba(46, 53, 37, 0.12);
+  }
+
+  .backdrop-choice:focus-visible {
+    outline: var(--gb-px) solid var(--ink);
+    outline-offset: var(--gb-px);
+  }
+
+  .dialogue-panel {
+    position: relative;
+    z-index: 5;
+    grid-row: 2;
+    justify-self: center;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: calc(var(--gb-px) * 4);
+    width: min(100%, calc(var(--gb-px) * var(--dialogue-columns)));
+    padding: calc(var(--gb-px) * 4);
+    background: var(--lcd-panel);
+    border: var(--gb-px) solid var(--ink);
+    box-shadow:
+      inset 0 0 0 var(--gb-px) var(--lcd-panel),
+      inset 0 0 0 calc(var(--gb-px) * 2) var(--ink);
+  }
+
+  .portrait {
+    display: grid;
+    place-items: center;
+    width: var(--avatar-size);
+    height: var(--avatar-size);
+    align-self: start;
+    overflow: hidden;
+    border: var(--gb-px) solid var(--ink);
+    background: var(--lcd);
+  }
+
+  .dialogue-copy {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: calc(var(--gb-px) * 4);
+    min-width: 0;
+    padding: calc(var(--gb-px) * 3) calc(var(--gb-px) * 4)
+      calc(var(--gb-px) * 3) 0;
   }
 
   h1 {
-    text-align: center;
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--pixel-font);
+    font-size: var(--game-text-size);
+    font-weight: 700;
+    line-height: 1.75;
+    letter-spacing: 0;
+    text-wrap: nowrap;
+  }
+
+  .avatar {
+    display: block;
+    width: 100%;
+    height: 100%;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+    object-fit: cover;
+  }
+
+  .choice-menu {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    gap: calc(var(--gb-px) * 4) calc(var(--gb-px) * 8);
+    align-self: end;
+    justify-content: start;
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .game-link {
+    display: grid;
+    grid-template-columns: calc(var(--gb-px) * 6) max-content;
+    align-items: center;
+    gap: calc(var(--gb-px) * 3);
+    width: auto;
+    min-width: calc(var(--gb-px) * 44);
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: var(--game-text-size);
+    font-weight: 700;
+    line-height: 1.35;
+    outline: none;
+  }
+
+  .choice-cursor {
+    opacity: 0;
+  }
+
+  .game-link.is-selected .choice-cursor {
+    opacity: 1;
+    animation: blink 1s step-end infinite;
+  }
+
+  .game-link:focus-visible .choice-cursor {
+    opacity: 1;
+  }
+
+  .game-link:focus-visible {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--ink);
+    box-shadow: none;
+  }
+
+  .link-label {
+    text-decoration: none;
+  }
+
+  @keyframes blink {
+    0%,
+    49% {
+      opacity: 1;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 620px) {
+    :global(body.immersive) {
+      overflow: auto;
+    }
+
+    .gameboy-page {
+      --avatar-size: calc(var(--gb-px) * 40);
+      --game-text-size: clamp(0.62rem, calc(var(--gb-px) * 3.7), 0.82rem);
+    }
+
+    .lcd {
+      min-height: 100dvh;
+      gap: calc(var(--gb-px) * 6);
+      padding: calc(var(--gb-px) * 8);
+    }
+
+    .dialogue-panel {
+      grid-template-columns: 1fr;
+    }
+
+    .portrait {
+      justify-self: start;
+    }
+
+    .dialogue-copy {
+      padding: 0 calc(var(--gb-px) * 3) calc(var(--gb-px) * 3);
+    }
+
+    h1 {
+      text-wrap: balance;
+    }
+
+    .choice-menu {
+      grid-template-columns: 1fr;
+    }
+
+    .game-link {
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 </style>
