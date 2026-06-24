@@ -7,7 +7,7 @@ export const routes: Record<Section, string> = {
   experience: '/experience',
 };
 
-export const navigation: Section[] = ['about', 'projects', 'experience'];
+export const navigation: Section[] = ['about', 'projects'];
 
 export const baseUrl = 'https://reobin.dev';
 
