@@ -1,0 +1,35 @@
+---
+interface Props {
+  alt?: string;
+  class?: string;
+  decoding?: 'async' | 'auto' | 'sync';
+  fetchpriority?: 'auto' | 'high' | 'low';
+  height: number;
+  loading?: 'eager' | 'lazy';
+  width: number;
+}
+
+const {
+  alt = '',
+  class: className,
+  decoding = 'async',
+  fetchpriority = 'auto',
+  height,
+  loading = 'lazy',
+  width,
+} = Astro.props;
+const portraitBase = '/portraits/reobin-portrait';
+---
+
+<picture class="portrait-picture">
+  <img
+    class={className}
+    src={`${portraitBase}-1024.png`}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={loading}
+    fetchpriority={fetchpriority}
+    decoding={decoding}
+  />
+</picture>

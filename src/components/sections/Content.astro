@@ -1,0 +1,16 @@
+---
+import type { Section } from '../../data/content';
+import About from './About.astro';
+import Experience from './Experience.astro';
+import Projects from './Projects.astro';
+
+interface Props {
+  activeSection: Section;
+}
+
+const { activeSection } = Astro.props;
+---
+
+{activeSection === 'about' && <About />}
+{activeSection === 'projects' && <Projects />}
+{activeSection === 'experience' && <Experience />}

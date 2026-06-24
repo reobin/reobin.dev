@@ -1,0 +1,25 @@
+<svg
+	xmlns="http://www.w3.org/2000/svg"
+	viewBox="0 0 16 16"
+	fill="currentColor"
+	shape-rendering="crispEdges"
+>
+	<path
+		class="icon-bg"
+		fill="none"
+		d="
+			M6 1h4v1h1v4h1v1h1v1h1v1h1v5H1v-5h1V9h1V8h1V7h1V6h1z
+		"
+	/>
+	<path
+		d="
+			M6 1h4v1H6z
+			M5 2h6v3H5z
+			M6 5h4v1H6z
+			M4 7h2v1H4z M10 7h2v1h-2z
+			M3 8h4v1H3z M9 8h4v1H9z
+			M2 9h12v1H2z
+			M1 10h14v4H1z
+		"
+	/>
+</svg>

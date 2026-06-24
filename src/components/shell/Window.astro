@@ -1,0 +1,80 @@
+---
+import type { Section } from '../../data/content';
+import { content } from '../../data/content';
+import Chrome from './Chrome.astro';
+import Sidebar from './Sidebar.astro';
+import SectionContent from '../sections/Content.astro';
+import NotFound from '../sections/NotFound.astro';
+
+interface Props {
+  activeSection: Section | null;
+  notFound?: boolean;
+}
+
+const { activeSection, notFound = false } = Astro.props;
+const a11yCopy = content.locales.en.a11y;
+const frA11yCopy = content.locales.fr.a11y;
+---
+
+<section
+  class="window"
+  aria-label={a11yCopy.window}
+  data-aria-en={a11yCopy.window}
+  data-aria-fr={frA11yCopy.window}
+>
+  <Chrome title={notFound ? '404' : 'reobin.dev'} />
+
+  <div class="window-body">
+    <Sidebar activeSection={activeSection} />
+
+    <div class="scroll-frame" data-scroll-frame>
+      <div
+        id="main-content"
+        class="detail"
+        data-detail
+        role="region"
+        aria-label={a11yCopy.pageContent}
+        data-aria-en={a11yCopy.pageContent}
+        data-aria-fr={frA11yCopy.pageContent}
+        tabindex="0"
+      >
+        {
+          notFound ? (
+            <NotFound />
+          ) : (
+            activeSection && <SectionContent activeSection={activeSection} />
+          )
+        }
+      </div>
+      <div
+        class="scrollbar-rail"
+        role="group"
+        aria-label={a11yCopy.scrollControls}
+        data-aria-en={a11yCopy.scrollControls}
+        data-aria-fr={frA11yCopy.scrollControls}
+      >
+        <button
+          class="scroll-arrow scroll-arrow-up"
+          type="button"
+          data-scroll-up
+          aria-label={a11yCopy.scrollUp}
+          data-aria-en={a11yCopy.scrollUp}
+          data-aria-fr={frA11yCopy.scrollUp}
+          aria-controls="main-content"
+          disabled></button>
+        <div class="scroll-track" aria-hidden="true">
+          <div class="scroll-thumb" data-scroll-thumb aria-hidden="true"></div>
+        </div>
+        <button
+          class="scroll-arrow scroll-arrow-down"
+          type="button"
+          data-scroll-down
+          aria-label={a11yCopy.scrollDown}
+          data-aria-en={a11yCopy.scrollDown}
+          data-aria-fr={frA11yCopy.scrollDown}
+          aria-controls="main-content"
+          disabled></button>
+      </div>
+    </div>
+  </div>
+</section>

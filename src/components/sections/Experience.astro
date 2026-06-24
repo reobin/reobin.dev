@@ -1,0 +1,33 @@
+---
+import { content } from '../../data/content';
+import ExperienceItem from './ExperienceItem.astro';
+
+const rows = content.locales.en.experience.rows;
+const localizedRows = content.locales.fr.experience.rows;
+const footerLink = content.links[1];
+---
+
+<section class="panel list-panel is-active" data-panel="experience">
+  <div class="rows">
+    {
+      rows.map((experience, index) => (
+        <ExperienceItem
+          experience={experience}
+          localizedExperience={localizedRows[index]}
+        />
+      ))
+    }
+  </div>
+  <div class="list-footer">
+    <ul class="links-list">
+      <li>
+        <a href={footerLink.href} target="_blank" rel="noopener noreferrer">
+          <span class="link-icon" aria-hidden="true">
+            {footerLink.icon}
+          </span>
+          <span>{footerLink.label}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>

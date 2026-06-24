@@ -1,0 +1,33 @@
+---
+import LocaleText from '../shared/LocaleText.astro';
+
+interface Experience {
+  readonly role: string;
+  readonly org: string;
+  readonly period: string;
+  readonly description: string;
+}
+
+interface Props {
+  experience: Experience;
+  localizedExperience: Experience;
+}
+
+const { experience, localizedExperience } = Astro.props;
+---
+
+<article class="row row-wide">
+  <div class="row-main">
+    <div class="row-title">
+      <span class="row-title-text">
+        <LocaleText en={experience.role} fr={localizedExperience.role} />
+      </span>
+    </div>
+    <p class="row-org">
+      <LocaleText en={experience.org} fr={localizedExperience.org} />
+    </p>
+  </div>
+  <div class="row-period">
+    <LocaleText en={experience.period} fr={localizedExperience.period} />
+  </div>
+</article>
