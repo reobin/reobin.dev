@@ -50,7 +50,7 @@
   --ink: #111;
   --paper: #fff;
   --chrome: #fefefe;
-  --desktop-a: #fff;
+  --desktop-a: #f6f6f0;
   --desktop-b: #111;
   --muted: #555;
   --hairline: #dcdcdc;
@@ -146,6 +146,8 @@
   --ink: #e9e9df;
   --paper: #11110f;
   --chrome: #171713;
+  --desktop-a: #000;
+  --desktop-b: #4f4f4f;
   --muted: #adada1;
   --hairline: #37372f;
   --shadow: #0000008c;
@@ -156,6 +158,8 @@
     --ink: #e9e9df;
     --paper: #11110f;
     --chrome: #171713;
+    --desktop-a: #000;
+    --desktop-b: #4f4f4f;
     --muted: #adada1;
     --hairline: #37372f;
     --shadow: #0000008c;
@@ -168,13 +172,13 @@
 
 html,
 body {
+  background-color: var(--desktop-a);
   height: 100%;
   margin: 0;
 }
 
 body {
   color: var(--ink);
-  background-color: var(--desktop-a);
   font-family: var(--font-title);
   -webkit-font-smoothing: none;
   font-smooth: never;

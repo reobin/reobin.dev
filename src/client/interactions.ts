@@ -8,6 +8,10 @@ const THEME_STORAGE_KEY = 'reobin-theme';
 const SKIP_SPLASH_STORAGE_KEY = 'reobin_skip_next_splash';
 const SUPPORTED_LOCALES = ['en', 'fr'] as const satisfies readonly Locale[];
 const DEFAULT_LOCALE: Locale = 'en';
+const THEME_COLORS = {
+  light: '#f6f6f0',
+  dark: '#000000',
+} as const satisfies Record<Theme, string>;
 
 const isTheme = (value: string | null): value is Theme =>
   value === 'light' || value === 'dark';
@@ -93,6 +97,9 @@ export const initInteractions = () => {
   const themeButton = document.querySelector<HTMLButtonElement>(
     '[data-theme-toggle]',
   );
+  const themeColor = document.querySelector<HTMLMetaElement>(
+    'meta[name="theme-color"]',
+  );
   const detailPane = document.querySelector<HTMLElement>('[data-detail]');
   const splashOverlay = document.querySelector<HTMLElement>('[data-splash]');
   const scrollbars = initScrollbars();
@@ -116,6 +123,7 @@ export const initInteractions = () => {
     } else {
       delete document.documentElement.dataset.theme;
     }
+    themeColor?.setAttribute('content', THEME_COLORS[state.theme]);
     themeButton?.setAttribute('aria-pressed', String(dark));
   };
 
