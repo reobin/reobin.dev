@@ -1,0 +1,40 @@
+---
+import LocaleText from '../shared/LocaleText.astro';
+
+interface Project {
+  readonly name: string;
+  readonly href: string;
+  readonly icon: string;
+  readonly description: string;
+}
+
+interface Props {
+  project: Project;
+  localizedProject: Project;
+}
+
+const { project, localizedProject } = Astro.props;
+const iconClass = project.icon
+  ? `project-icon project-icon-${project.icon}`
+  : 'document-icon';
+---
+
+<article class="row">
+  <div class="row-main">
+    <a
+      class="row-title"
+      href={project.href}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span class={iconClass} aria-hidden="true"></span>
+      <span class="row-title-text">
+        <LocaleText en={project.name} fr={localizedProject.name} />
+      </span>
+      <span class="row-link-glyph" aria-hidden="true"></span>
+    </a>
+    <p class="row-desc">
+      <LocaleText en={project.description} fr={localizedProject.description} />
+    </p>
+  </div>
+</article>

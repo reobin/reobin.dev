@@ -1,0 +1,46 @@
+---
+import { content } from '../../data/content';
+import LocaleText from '../shared/LocaleText.astro';
+import PortraitImage from '../shared/PortraitImage.astro';
+
+const copy = content.locales.en.notFound;
+const frCopy = content.locales.fr.notFound;
+---
+
+<section
+  class="panel not-found-panel is-active"
+  data-panel="not-found"
+  aria-labelledby="not-found-title"
+>
+  <div class="not-found-stage">
+    <h2 id="not-found-title" class="not-found-title">404</h2>
+    <div class="broken-avatar" aria-hidden="true">
+      <PortraitImage
+        class="broken-avatar-image"
+        alt=""
+        width={168}
+        height={168}
+        loading="eager"
+        fetchpriority="high"
+        decoding="sync"
+      />
+      <svg class="broken-expression" viewBox="0 0 22 16" aria-hidden="true">
+        <rect x="2" y="1" width="2" height="2" fill="currentColor"></rect>
+        <rect x="6" y="1" width="2" height="2" fill="currentColor"></rect>
+        <rect x="4" y="3" width="2" height="2" fill="currentColor"></rect>
+        <rect x="2" y="5" width="2" height="2" fill="currentColor"></rect>
+        <rect x="6" y="5" width="2" height="2" fill="currentColor"></rect>
+        <rect x="14" y="1" width="2" height="2" fill="currentColor"></rect>
+        <rect x="18" y="1" width="2" height="2" fill="currentColor"></rect>
+        <rect x="16" y="3" width="2" height="2" fill="currentColor"></rect>
+        <rect x="14" y="5" width="2" height="2" fill="currentColor"></rect>
+        <rect x="18" y="5" width="2" height="2" fill="currentColor"></rect>
+        <rect x="10" y="9" width="2" height="2" fill="currentColor"></rect>
+        <rect x="7" y="13" width="8" height="2" fill="currentColor"></rect>
+      </svg>
+    </div>
+    <a class="pixel-button" href="/">
+      <LocaleText en={copy.goHome} fr={frCopy.goHome} />
+    </a>
+  </div>
+</section>

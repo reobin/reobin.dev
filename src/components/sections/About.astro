@@ -1,0 +1,52 @@
+---
+import { content } from '../../data/content';
+import LocaleText from '../shared/LocaleText.astro';
+import PortraitImage from '../shared/PortraitImage.astro';
+
+const about = content.locales.en.about;
+const localizedAbout = content.locales.fr.about;
+---
+
+<section class="panel is-active" data-panel="about">
+  <div class="intro">
+    <PortraitImage
+      class="portrait"
+      alt="Pixelated portrait of reobin"
+      width={128}
+      height={128}
+      loading="eager"
+      fetchpriority="high"
+      decoding="sync"
+    />
+    <div>
+      <h2 class="person-name">Robin Gagnon</h2>
+      <p class="tagline">
+        <LocaleText en={about.tagline} fr={localizedAbout.tagline} />
+      </p>
+    </div>
+  </div>
+
+  <div class="section-rule" aria-hidden="true"></div>
+
+  <nav
+    class="links-block"
+    aria-label={about.links}
+    data-aria-en={about.links}
+    data-aria-fr={localizedAbout.links}
+  >
+    <ul class="links-list">
+      {
+        content.links.map(link => (
+          <li>
+            <a href={link.href} target="_blank" rel="noopener noreferrer">
+              <span class="link-icon" aria-hidden="true">
+                {link.icon}
+              </span>
+              <span>{link.label}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</section>

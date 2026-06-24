@@ -1,0 +1,33 @@
+---
+import { content } from '../../data/content';
+import ProjectItem from './ProjectItem.astro';
+
+const rows = content.locales.en.projects.rows;
+const localizedRows = content.locales.fr.projects.rows;
+const footerLink = content.links[0];
+---
+
+<section class="panel list-panel is-active" data-panel="projects">
+  <div class="rows">
+    {
+      rows.map((project, index) => (
+        <ProjectItem
+          project={project}
+          localizedProject={localizedRows[index]}
+        />
+      ))
+    }
+  </div>
+  <div class="list-footer">
+    <ul class="links-list">
+      <li>
+        <a href={footerLink.href} target="_blank" rel="noopener noreferrer">
+          <span class="link-icon" aria-hidden="true">
+            {footerLink.icon}
+          </span>
+          <span>{footerLink.label}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>

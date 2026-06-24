@@ -1,0 +1,159 @@
+---
+import { baseUrl, content, routes, seo, type Section } from '../data/content';
+import Window from '../components/shell/Window.astro';
+import LocaleText from '../components/shared/LocaleText.astro';
+import '../styles/main.css';
+
+interface Props {
+  activeSection?: Section | null;
+  notFound?: boolean;
+}
+
+const { activeSection = 'about', notFound = false } = Astro.props;
+const pageTitle =
+  notFound || !activeSection
+    ? `${seo.notFound.title} - reobin.dev`
+    : seo.pages[activeSection].title === seo.defaultTitle
+      ? seo.defaultTitle
+      : seo.titleTemplate.replace('%s', seo.pages[activeSection].title);
+const shouldPreloadPortrait = notFound || activeSection === 'about';
+const portraitSrc = '/portraits/reobin-portrait-1024.png';
+const fontPreloads = ['/fonts/pixelify-sans/PixelifySans-wght.ttf'];
+const a11yCopy = content.locales.en.a11y;
+const frA11yCopy = content.locales.fr.a11y;
+const pageDescription =
+  notFound || !activeSection
+    ? seo.notFound.description
+    : seo.pages[activeSection].description;
+const canonicalPath =
+  notFound || !activeSection ? '/404' : routes[activeSection];
+const canonicalUrl = new URL(canonicalPath, baseUrl).toString();
+const imageUrl = new URL(seo.image.src, baseUrl).toString();
+
+if (activeSection === 'about' || activeSection === 'projects') {
+  fontPreloads.push('/fonts/chivo/Chivo-Regular.ttf');
+}
+
+if (activeSection === 'experience') {
+  fontPreloads.push('/fonts/vt323/VT323-Regular.ttf');
+}
+
+if (notFound) {
+  fontPreloads.push('/fonts/silkscreen/Silkscreen-Bold.ttf');
+}
+---
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={pageDescription} />
+    {notFound && <meta name="robots" content="noindex, follow" />}
+    <link rel="canonical" href={canonicalUrl} />
+    {
+      activeSection && (
+        <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
+      )
+    }
+    <meta property="og:site_name" content="reobin.dev" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content={seo.image.width.toString()} />
+    <meta property="og:image:height" content={seo.image.height.toString()} />
+    <meta property="og:image:alt" content={seo.image.alt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:image:alt" content={seo.image.alt} />
+    {
+      fontPreloads.map(href => (
+        <link rel="preload" href={href} as="font" type="font/ttf" crossorigin />
+      ))
+    }
+    {
+      shouldPreloadPortrait && (
+        <link
+          rel="preload"
+          href={portraitSrc}
+          as="image"
+          type="image/png"
+          fetchpriority="high"
+        />
+      )
+    }
+    <title>{pageTitle}</title>
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        root.classList.remove('no-js');
+        root.classList.add('js');
+
+        try {
+          const storedTheme = localStorage.getItem('reobin-theme');
+          const storedLocale = localStorage.getItem('reobin-locale');
+          const locales = ['en', 'fr'];
+          const defaultLocale = 'en';
+          const systemLocale =
+            (navigator.languages?.length
+              ? navigator.languages
+              : [navigator.language]
+            )
+              .map(language => language?.split('-')[0])
+              .find(language => locales.includes(language)) || defaultLocale;
+          const locale = locales.includes(storedLocale)
+            ? storedLocale
+            : systemLocale;
+          if (storedTheme === 'light' || storedTheme === 'dark') {
+            root.dataset.theme = storedTheme;
+          }
+          root.lang = locale;
+
+          const skipSplash =
+            sessionStorage.getItem('reobin_skip_next_splash') === '1';
+          const reduceMotion = window.matchMedia(
+            '(prefers-reduced-motion: reduce)',
+          ).matches;
+          if (skipSplash || reduceMotion) {
+            root.classList.add('splash-seen');
+          } else {
+            root.classList.add('splash-active');
+            if ('scrollRestoration' in history) {
+              history.scrollRestoration = 'manual';
+            }
+            window.scrollTo(0, 0);
+          }
+        } catch {
+          /* keep the static fallback if storage or media queries are unavailable */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">
+      <LocaleText en={a11yCopy.skipToContent} fr={frA11yCopy.skipToContent} />
+    </a>
+    <main class="desktop" aria-label="reobin.dev">
+      <Window activeSection={activeSection} notFound={notFound} />
+    </main>
+    <div class="splash-overlay" data-splash aria-hidden="true">
+      <div class="splash-backdrop">
+        <div class="splash-zoom">
+          <div class="splash-rect splash-rect-outline"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      import { initInteractions } from '../client/interactions';
+
+      initInteractions();
+    </script>
+  </body>
+</html>

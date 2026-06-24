@@ -1,0 +1,15 @@
+---
+interface Props {
+  title?: string;
+}
+
+const { title = 'reobin.dev' } = Astro.props;
+---
+
+<header class="titlebar">
+  <div class="title-control">
+    <span class="window-box" aria-hidden="true"></span>
+  </div>
+  <div class="title-stripes" aria-hidden="true"></div>
+  <h1 class="window-title">{title}</h1>
+</header>

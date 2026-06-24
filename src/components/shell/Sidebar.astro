@@ -1,0 +1,99 @@
+---
+import type { Section } from '../../data/content';
+import aboutIcon from '../../assets/icons/about.svg?raw';
+import experienceIcon from '../../assets/icons/experience.svg?raw';
+import projectsIcon from '../../assets/icons/projects.svg?raw';
+import { content, navigation, routes } from '../../data/content';
+import LocaleText from '../shared/LocaleText.astro';
+
+interface Props {
+  activeSection: Section | null;
+}
+
+const { activeSection } = Astro.props;
+const copy = content.locales.en.nav;
+const frCopy = content.locales.fr.nav;
+const settingsCopy = content.locales.en.settings;
+const frSettingsCopy = content.locales.fr.settings;
+const a11yCopy = content.locales.en.a11y;
+const frA11yCopy = content.locales.fr.a11y;
+const icons: Record<Section, string> = {
+  about: aboutIcon,
+  projects: projectsIcon,
+  experience: experienceIcon,
+};
+---
+
+<nav
+  class="sidebar"
+  aria-label={a11yCopy.sections}
+  data-aria-en={a11yCopy.sections}
+  data-aria-fr={frA11yCopy.sections}
+>
+  {
+    navigation.map(tab => (
+      <a
+        class:list={['tab', activeSection === tab && 'is-active']}
+        href={routes[tab]}
+        data-tab={tab}
+        aria-current={activeSection === tab ? 'page' : undefined}
+      >
+        <span class="nav-icon" aria-hidden="true" set:html={icons[tab]} />
+        <span class="nav-label nav-label-full">
+          <LocaleText en={copy[tab]} fr={frCopy[tab]} />
+        </span>
+        <span class="nav-label nav-label-short">
+          <LocaleText
+            en={content.locales.en.navShort[tab]}
+            fr={content.locales.fr.navShort[tab]}
+          />
+        </span>
+      </a>
+    ))
+  }
+  <section
+    class="sidebar-controls"
+    aria-label={a11yCopy.displaySettings}
+    data-aria-en={a11yCopy.displaySettings}
+    data-aria-fr={frA11yCopy.displaySettings}
+  >
+    <div
+      class="settings-group language-toggle"
+      role="group"
+      aria-label={a11yCopy.language}
+      data-aria-en={a11yCopy.language}
+      data-aria-fr={frA11yCopy.language}
+    >
+      <button
+        class="settings-option is-active"
+        type="button"
+        data-locale-button="en"
+        aria-pressed="true"
+      >
+        <span class="settings-glyph settings-radio" aria-hidden="true"></span>
+        <span lang="en">English</span>
+      </button>
+      <button
+        class="settings-option"
+        type="button"
+        data-locale-button="fr"
+        aria-pressed="false"
+      >
+        <span class="settings-glyph settings-radio" aria-hidden="true"></span>
+        <span lang="fr">Français</span>
+      </button>
+    </div>
+    <div class="settings-divider" aria-hidden="true"></div>
+    <button
+      class="settings-option night-toggle"
+      type="button"
+      data-theme-toggle
+      aria-pressed="false"
+    >
+      <span class="settings-glyph settings-check" aria-hidden="true"></span>
+      <span>
+        <LocaleText en={settingsCopy.night} fr={frSettingsCopy.night} />
+      </span>
+    </button>
+  </section>
+</nav>
