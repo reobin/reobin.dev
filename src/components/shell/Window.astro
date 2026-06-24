@@ -1,6 +1,6 @@
 ---
 import type { Section } from '../../data/content';
-import { content } from '../../data/content';
+import { content, navigation } from '../../data/content';
 import Chrome from './Chrome.astro';
 import Sidebar from './Sidebar.astro';
 import SectionContent from '../sections/Content.astro';
@@ -24,7 +24,7 @@ const frA11yCopy = content.locales.fr.a11y;
 >
   <Chrome title={notFound ? '404' : 'reobin.dev'} />
 
-  <div class="window-body">
+  <div class="window-body" style={`--nav-column-count: ${navigation.length}`}>
     <Sidebar activeSection={activeSection} />
 
     <div class="scroll-frame" data-scroll-frame>

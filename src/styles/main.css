@@ -1376,7 +1376,7 @@ a.row-title:hover .folder-icon {
   }
 
   .window-body {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(var(--nav-column-count), minmax(0, 1fr));
     grid-template-rows: auto minmax(0, 1fr) auto;
     min-height: 0;
     display: grid;
