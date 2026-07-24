@@ -35,7 +35,6 @@ const icons: Record<Section, string> = {
       <a
         class:list={['tab', activeSection === tab && 'is-active']}
         href={routes[tab]}
-        data-tab={tab}
         aria-current={activeSection === tab ? 'page' : undefined}
       >
         <span class="nav-icon" aria-hidden="true" set:html={icons[tab]} />
@@ -56,6 +55,7 @@ const icons: Record<Section, string> = {
     aria-label={a11yCopy.displaySettings}
     data-aria-en={a11yCopy.displaySettings}
     data-aria-fr={frA11yCopy.displaySettings}
+    transition:persist="display-settings"
   >
     <div
       class="settings-group language-toggle"

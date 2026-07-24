@@ -73,6 +73,8 @@ const updateScrollFrame = (frame: HTMLElement) => {
 };
 
 export const initScrollbars = () => {
+  const controller = new AbortController();
+  const { signal } = controller;
   const frames = Array.from(
     document.querySelectorAll<HTMLElement>('[data-scroll-frame]'),
   );
@@ -90,54 +92,73 @@ export const initScrollbars = () => {
       frame.querySelector<HTMLButtonElement>('[data-scroll-down]');
     const thumb = frame.querySelector<HTMLElement>('[data-scroll-thumb]');
 
-    scrollUpButton?.addEventListener('click', () => {
-      detailPane?.scrollBy({ top: -SCROLL_STEP });
-    });
+    scrollUpButton?.addEventListener(
+      'click',
+      () => {
+        detailPane?.scrollBy({ top: -SCROLL_STEP });
+      },
+      { signal },
+    );
 
-    scrollDownButton?.addEventListener('click', () => {
-      detailPane?.scrollBy({ top: SCROLL_STEP });
-    });
+    scrollDownButton?.addEventListener(
+      'click',
+      () => {
+        detailPane?.scrollBy({ top: SCROLL_STEP });
+      },
+      { signal },
+    );
 
-    detailPane?.addEventListener('scroll', () => {
-      updateScrollFrame(frame);
-    });
+    detailPane?.addEventListener(
+      'scroll',
+      () => {
+        updateScrollFrame(frame);
+      },
+      { signal },
+    );
 
-    thumb?.addEventListener('pointerdown', event => {
-      if (event.button !== 0) return;
+    thumb?.addEventListener(
+      'pointerdown',
+      event => {
+        if (event.button !== 0) return;
 
-      const metrics = getScrollMetrics(frame);
-      if (!metrics?.canScroll || metrics.maxThumbTop <= 0) return;
+        const metrics = getScrollMetrics(frame);
+        if (!metrics?.canScroll || metrics.maxThumbTop <= 0) return;
 
-      event.preventDefault();
-      thumb.classList.add('is-dragging');
-      thumb.setPointerCapture?.(event.pointerId);
+        event.preventDefault();
+        thumb.classList.add('is-dragging');
+        thumb.setPointerCapture?.(event.pointerId);
 
-      const startClientY = event.clientY;
-      const startScrollTop = metrics.detailPane.scrollTop;
-      const scrollPerPixel = metrics.maxScroll / metrics.maxThumbTop;
+        const startClientY = event.clientY;
+        const startScrollTop = metrics.detailPane.scrollTop;
+        const scrollPerPixel = metrics.maxScroll / metrics.maxThumbTop;
 
-      const drag = (event: PointerEvent) => {
-        metrics.detailPane.scrollTop =
-          startScrollTop + (event.clientY - startClientY) * scrollPerPixel;
-      };
-      const stopDrag = (event: PointerEvent) => {
-        thumb.classList.remove('is-dragging');
-        try {
-          thumb.releasePointerCapture?.(event.pointerId);
-        } catch {}
-        window.removeEventListener('pointermove', drag);
-        window.removeEventListener('pointerup', stopDrag);
-        window.removeEventListener('pointercancel', stopDrag);
-      };
+        const drag = (event: PointerEvent) => {
+          metrics.detailPane.scrollTop =
+            startScrollTop + (event.clientY - startClientY) * scrollPerPixel;
+        };
+        const stopDrag = (event: PointerEvent) => {
+          thumb.classList.remove('is-dragging');
+          try {
+            thumb.releasePointerCapture?.(event.pointerId);
+          } catch {}
+          window.removeEventListener('pointermove', drag);
+          window.removeEventListener('pointerup', stopDrag);
+          window.removeEventListener('pointercancel', stopDrag);
+        };
 
-      window.addEventListener('pointermove', drag);
-      window.addEventListener('pointerup', stopDrag);
-      window.addEventListener('pointercancel', stopDrag);
-    });
+        window.addEventListener('pointermove', drag, { signal });
+        window.addEventListener('pointerup', stopDrag, { signal });
+        window.addEventListener('pointercancel', stopDrag, { signal });
+      },
+      { signal },
+    );
   }
 
-  window.addEventListener('resize', update);
+  window.addEventListener('resize', update, { signal });
   update();
 
-  return { update };
+  return {
+    destroy: () => controller.abort(),
+    update,
+  };
 };

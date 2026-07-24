@@ -1,5 +1,13 @@
 ---
 import { baseUrl, content, routes, seo, type Section } from '../data/content';
+import {
+  DEFAULT_LOCALE,
+  LOCALE_STORAGE_KEY,
+  SUPPORTED_LOCALES,
+  THEME_COLORS,
+  THEME_STORAGE_KEY,
+} from '../client/preferences';
+import { ClientRouter } from 'astro:transitions';
 import Window from '../components/shell/Window.astro';
 import LocaleText from '../components/shared/LocaleText.astro';
 import '../styles/main.css';
@@ -44,7 +52,7 @@ if (notFound) {
 ---
 
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="en" class="no-js" transition:animate="none">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -91,18 +99,38 @@ if (notFound) {
       )
     }
     <title>{pageTitle}</title>
-    <script is:inline>
+    <ClientRouter />
+    <!-- Apply preferences before first paint; subsequent swaps use the bundled client module. -->
+    <script
+      is:inline
+      data-default-locale={DEFAULT_LOCALE}
+      data-locale-storage-key={LOCALE_STORAGE_KEY}
+      data-supported-locales={SUPPORTED_LOCALES.join(',')}
+      data-theme-colors={JSON.stringify(THEME_COLORS)}
+      data-theme-storage-key={THEME_STORAGE_KEY}
+    >
       (() => {
         const root = document.documentElement;
         root.classList.remove('no-js');
         root.classList.add('js');
 
         try {
-          const storedTheme = localStorage.getItem('reobin-theme');
-          const storedLocale = localStorage.getItem('reobin-locale');
+          const config = document.currentScript?.dataset;
+          if (
+            !config?.defaultLocale ||
+            !config.localeStorageKey ||
+            !config.supportedLocales ||
+            !config.themeColors ||
+            !config.themeStorageKey
+          ) {
+            return;
+          }
+
+          const supportedLocales = config.supportedLocales.split(',');
+          const themeColors = JSON.parse(config.themeColors);
+          const storedTheme = localStorage.getItem(config.themeStorageKey);
+          const storedLocale = localStorage.getItem(config.localeStorageKey);
           const themeColor = document.querySelector('meta[name="theme-color"]');
-          const locales = ['en', 'fr'];
-          const defaultLocale = 'en';
           const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
             .matches
             ? 'dark'
@@ -117,25 +145,21 @@ if (notFound) {
               : [navigator.language]
             )
               .map(language => language?.split('-')[0])
-              .find(language => locales.includes(language)) || defaultLocale;
-          const locale = locales.includes(storedLocale)
+              .find(language => supportedLocales.includes(language)) ||
+            config.defaultLocale;
+          const locale = supportedLocales.includes(storedLocale)
             ? storedLocale
             : systemLocale;
           if (storedTheme === 'light' || storedTheme === 'dark') {
             root.dataset.theme = storedTheme;
           }
-          themeColor?.setAttribute(
-            'content',
-            theme === 'dark' ? '#000000' : '#f6f6f0',
-          );
+          themeColor?.setAttribute('content', themeColors[theme]);
           root.lang = locale;
 
-          const skipSplash =
-            sessionStorage.getItem('reobin_skip_next_splash') === '1';
           const reduceMotion = window.matchMedia(
             '(prefers-reduced-motion: reduce)',
           ).matches;
-          if (skipSplash || reduceMotion) {
+          if (reduceMotion) {
             root.classList.add('splash-seen');
           } else {
             root.classList.add('splash-active');
@@ -165,9 +189,18 @@ if (notFound) {
       </div>
     </div>
     <script>
-      import { initInteractions } from '../client/interactions';
+      import {
+        initInteractions,
+        preparePageAfterSwap,
+      } from '../client/interactions';
 
-      initInteractions();
+      let cleanupInteractions: (() => void) | undefined;
+
+      document.addEventListener('astro:after-swap', preparePageAfterSwap);
+      document.addEventListener('astro:page-load', () => {
+        cleanupInteractions?.();
+        cleanupInteractions = initInteractions();
+      });
     </script>
   </body>
 </html>
