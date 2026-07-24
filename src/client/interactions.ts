@@ -170,8 +170,7 @@ export const initInteractions = () => {
         event.ctrlKey ||
         event.shiftKey ||
         event.altKey ||
-        event.button !== 0 ||
-        tab.getAttribute('aria-current') === 'page'
+        event.button !== 0
       ) {
         return;
       }
